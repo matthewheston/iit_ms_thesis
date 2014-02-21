@@ -1,5 +1,5 @@
-This repository contains scripts and materials for a final project in  CS 595:
-Machine Learning and Social Media. The repository is organized as follows:
+This repository contains scripts and materials for my thesis at the Illinois
+Institute of Technology, Spring 2014.
 
     code -- contains all scripts used for data analysis, including SQL scripts
     slides -- contains project proposal and final presentation slidedecks
