@@ -4,23 +4,12 @@
 
 \documentclass[12pt]{article}
 \usepackage{graphicx}
+\usepackage{fixltx2e}
 \usepackage{ntheorem}
 \newtheorem{hyp}{Hypothesis}
 
 \begin{document}
 \maketitle
-
-\begin{abstract}
-GitHub is a social website used to host open source software projects. In this
-study, we collect data from the website attempt to measure a user's activity in
-a repository, his reputation on the website, and the attention his first
-contribution to a repository receives. We posit hypotheses about the
-relationship between these variables and the likelihood that a user's first code
-contribution is accepted to the project. We find that these variables lack
-predictive power of pull request acceptance, but present some discussion on how
-the data relates to previous studies on how members become involved in open
-source software communities.
-\end{abstract}
 
 \section{Introduction}
 GitHub is a social website that open source software developers use to host
@@ -54,14 +43,15 @@ projects~\cite{hemetsberger_learning_2006}~\cite{hemetsberger_collective_2009}
 and the motivations of open source
 developers~\cite{hertel_motivation_2003}\cite{lakhani_why_2003}.
 
-Our study seeks to identify the relationship between social factors and the
-acceptance of code contributions of first time contributors. We draw on findings
-from previous studies that describe the joining process of new developers
-~~\cite{huang_mining_2005}\cite{von_krogh_community_2003}. We also draw from
-work that describes joining processes not only in open source software, but also
-from other computer mediated collaborative contexts, such as
+Our study seeks to which factors contribute to the acceptance of code
+contributions of first time contributors. We draw on findings from previous
+studies that describe the joining process of new developers
+~\cite{huang_mining_2005}\cite{von_krogh_community_2003}. We also draw from work
+that describes joining processes not only in open source software, but also from
+other computer mediated collaborative contexts, such as
 Wikipedia~\cite{bryant_becoming_2005}. Our goal is to provide an empirical
 understanding of community acceptance on a relatively new social platform.
+
 
 
 \paragraph{Outline}
@@ -101,8 +91,9 @@ popular repositories with the assumption that they would be maintained by an
 active community. We only consider pull requests with a status of closed. This
 resulted in approximately 44,400 pull requests. We then filter this data set to
 include only the first pull request a user submitted, which results in 13,383
-pull requests. Of these, 4,352, or 32.5\% of the pull requests were merged. For
-our intital experiments, we consider three features of the pull requests.
+pull requests. Of these, 4,352, or 32.5\% of the pull requests were merged. We
+consider several features, both on the pull request itself as well as the
+repository.
 
 \subsection{User Participation}
 In their study on members of Wikipedia, ~\cite{bryant_becoming_2005} note that
@@ -147,8 +138,8 @@ code changes accepted.
 \end{hyp}
 
 \subsection{Attention Pull Request Recieves}
-Lastly, we consider the attention the pull request receives, which we measure as
-the total number of comments on the pull request. Our intuition is that a high
+We consider the attention the pull request receives, which we measure as the
+total number of comments on the pull request. Our intuition is that a high
 number of comments indicates the pull request is generating interest within the
 community and is therefore more likely to be merged.
 
@@ -156,108 +147,244 @@ community and is therefore more likely to be merged.
 Pull requests with a high number of comments are more likely to be accepted.
 \end{hyp}
 
+\subsection{Number of Other Contributors}
+~\cite{viegas_studying_2004} find what they call a \textit{first-mover
+advantage} in the editing of Wikipedia articles, wherein the first contribution
+to a page tends to survive longer and recieve less modifications than following
+contributions. They hypothesize that the first user sets the tone of the article
+and their contributions therefore are more likely to survive. We predict a
+similar effect in pull requests, where the first persons to submit pull requests
+are more likely to be accepted.
+
+\begin{hyp}
+The likelihood a pull request is accepted declines as the number of contributors
+to a repository increases.
+\end{hyp}
+
+\subsection{Number of Previous Commits}
+Similar to the above hypothesis, we also measure the number of commits that have
+occurred in a repository prior the submission of the pull request. In addition
+to counting the number of previous contributors, we believe that commits here
+can be used as an estimate of how much activity has taken place in a codebase,
+and that as more activity occurs and project complexity grows, the likelihood of
+a pull request being accepted decreases.
+
+\begin{hyp}
+The likelihood a pull request is accepted declines as the number of commits to a
+repository increases.
+\end{hyp}
+
+\subsection{Size of the Pull Request}
+We use two metrics to measure the size of the commit, both the number of commits
+and the number of changes. As mentioned previously, a commit is a snapshot of
+the code at a certain point in time. Different developers might have different
+commit habits, but in general, larger changes will probably include more
+commits. The number of changes is calculated simply as the number of lines added
+and the number of lines deleted. As an example to help differentiate these two
+metrics, imagine the scenario of changing the name of a widely used variable
+across the code base. Every line where this variable name appears would be
+treated as being deleted and re-added using the new variable name by git,
+resulting in a large number of changes. The developer, however, would likely
+only make one commit to capture this change. We predict that smaller pull
+requests are more likely to be accepted, since they can be reviewed quickly and
+are unlikely to introduce new complexity.
+
+\begin{hyp}
+The likelihood a pull request is accepted declines as the size of the pull
+request increases.
+\end{hyp}
+
 \section{Methods}\label{methods}
 To test the relationship between the variables identified in Section~\ref{data},
 we apply a logistic regression model using these variables as indepedent
-variables and the binary outcome of merged or not as the dependent variable. The
-results from the regression are shown in Table~\ref{logit}. There is a positive
-correlation between user participation and user reputation. Unlike our
-hypothesis though, the relationship between the number of comments on a pull
-request and whether or not it is accepted is negative.
+variables and the binary outcome of merged or not as the dependent variable. We
+create categorical independent variables by binning the data. The results from
+the regression are shown in Table~\ref{logit}. In general, we do see the
+correlations we expect in the model, with the exception of the number of
+comments that the pull request receives, where we see a negative correlation. 
 
 Examining the decrease in deviance from the null deviance from our parameters
 indicates our model significantly ourperforms a null model. However, the
-$\chi^{2}$ value for the residual deviance is approiximately equal to 1,
-indicating that the logit model overall is a poor fit.
+$\chi^{2}$ value for the residual deviance is approximately equal to 1,
+indicating that the logit model overall may be a poor fit.
 
 
-\begin{table}[!htbp] \centering
-\caption{Logistic Regression results.}
-\label{logit}
-\begin{tabular}{@{\extracolsep{5pt}}lc}
-\\[-1.8ex]\hline
-\hline \\[-1.8ex]
-& \multicolumn{1}{c}{\textit{Dependent variable:}} \\
-\cline{2-2}
-\\[-1.8ex] & merged \\
-\hline \\[-1.8ex]
-User participation & 0.022$^{***}$ \\
-& (0.003) \\
-& \\
-User reputation & 0.0001$^{**}$ \\
-& (0.00003) \\
-& \\
-Attention pull request receives & $-$0.093$^{***}$ \\
-& (0.006) \\
-& \\
-Constant & $-$0.496$^{***}$ \\
-& (0.024) \\
-& \\
-\hline \\[-1.8ex]
-Observations & 13,383 \\
-Log Likelihood & $-$8,284.418 \\
-Akaike Inf. Crit. & 16,576.840 \\
-Null Deviance & 16882  on 13382  degrees of freedom \\
-Residual Deviance & 16569  on 13379  degrees of freedom \\
+\begin{table}[!htbp] \tiny \centering 
+\caption{Logistic Regression Results} 
+\label{logit} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+& \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & merged \\ 
+\hline \\[-1.8ex] 
+User participation\textsubscript{1} & 0.242 \\ 
+& (0.421) \\ 
+& \\ 
+User participation\textsubscript{2} & 0.912$^{*}$ \\ 
+& (0.513) \\ 
+& \\ 
+User participation\textsubscript{3} & 1.729$^{***}$ \\ 
+& (0.617) \\ 
+& \\ 
+Attention pull request receives\textsubscript{1} & $-$0.795$^{***}$
+\\ 
+& (0.155) \\ 
+& \\ 
+Attention pull request receives\textsubscript{2} & $-$0.053 \\ 
+& (0.325) \\ 
+& \\ 
+Attention pull request receives\textsubscript{3} & $-$0.019
+\\ 
+& (0.524) \\ 
+& \\ 
+User reputation\textsubscript{1} & 0.185$^{*}$
+\\ 
+& (0.101) \\ 
+& \\ 
+User reputation\textsubscript{2} &
+0.192 \\ 
+& (0.130) \\ 
+& \\ 
+User reputation\textsubscript{3}
+& 0.342$^{**}$ \\ 
+& (0.143) \\ 
+& \\ 
+Number of commits\textsubscript{1}
+& $-$1.195$^{***}$ \\ 
+& (0.416) \\ 
+& \\ 
+Number of commits\textsubscript{2}
+& $-$3.218$^{***}$ \\ 
+& (1.013) \\ 
+& \\ 
+Number of commits\textsubscript{3}
+& $-$13.219 \\ 
+& (114.104) \\ 
+& \\ 
+Number of changes\textsubscript{1}
+&
+$-$0.221$^{**}$
+\\ 
+& (0.108) \\ 
+& \\ 
+Number of changes\textsubscript{2}
+&
+$-$0.609$^{***}$
+\\ 
+&
+(0.148)
+\\ 
+& \\ 
+Number of changes\textsubscript{3}
+&
+$-$0.620$^{***}$
+\\ 
+&
+(0.192)
+\\ 
+&
+\\ 
+Number of repository commits\textsubscript{1}
+&
+$-$0.306$^{***}$
+\\ 
+&
+(0.050)
+\\ 
+&
+\\ 
+Number of repository commits\textsubscript{2}
+&
+$-$0.037
+\\ 
+&
+(0.060)
+\\ 
+&
+\\ 
+Number of repository commits\textsubscript{3}
+&
+0.245$^{***}$
+\\ 
+&
+(0.085)
+\\ 
+&
+\\ 
+Number of contributors\textsubscript{1}
+&
+$-$0.103$^{*}$
+\\ 
+&
+(0.055)
+\\ 
+&
+\\ 
+Number of contributors\textsubscript{2}
+&
+$-$0.657$^{***}$
+\\ 
+&
+(0.098)
+\\ 
+&
+\\ 
+Number of contributors\textsubscript{3}
+&
+$-$0.526$^{***}$
+\\ 
+&
+(0.140)
+\\ 
+&
+\\ 
+Constant
+&
+$-$0.547$^{***}$
+\\ 
+&
+(0.031)
+\\ 
+&
+\\ 
 \hline
-\hline \\[-1.8ex]
-\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1;
-  $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\
-  \normalsize
-  \end{tabular}
-  \end{table}
-
-In addition to this initial logistic regression model, we train several
-classifiers using these features. The feature set is first normalized by
-removing the mean and scaling to unit variance. Class weights for the
-classifiers are also adjusted given the skew of the dataset towards not merged.
-The results are shown in Table~\ref{classifier_initial}. Although the decision
-tree and support vector machine classifiers are able to achieve close to 70\%
-accuracy, they also have low recall, indicating that they are doing a poor job
-of correctly distinguishing merged pull requests.
-
-\begin{table}[!htbp] \centering
-\caption{Classifier results using only our social variables. Testing was run using 10 fold cross validation.}
-\label{classifier_initial}
-\begin{tabular}{|l|l|l|l|}
+\\[-1.8ex] 
+Observations
+&
+13,383
+\\ 
+Log
+Likelihood
+&
+$-$8,282.562
+\\ 
+Akaike
+Inf.
+Crit.
+&
+16,609.120
+\\ 
+\hline 
 \hline
-~                   & Accuracy & Precision & Recall \\
-    Logistic Regression & 59.7\%   & 42.3\%    & 66.0\% \\
-    Decision Tree       & 68.7\%   & 52.6\%    & 37.9\% \\
-    SVM                 & 69.9\%   & 55.0\%    & 41.4\% \\ \hline
-\end{tabular}
-\end{table}
-
-Given the poor performance in accurately discriminating the two classes, we also
-attempt to train these classifiers again adding two new features to these
-existing features. These two new features are the number of commits and the
-number of changes associated with the pull request. As mentioned previously, a
-commit is a snapshot of the code at a certain point in time. Different
-developers might have different commit habits, but in general, larger changes
-will probably include more commits. The number of changes is calculated simply
-as the number of lines added and the number of lines deleted. The results are
-shown in Table~\ref{classifier_updated}. The purpose in choosing these features
-is to look outside of strictly social factors and include features related to
-the code itself. The addition of these features do not seem to improve our
-results.
-
-\begin{table}[!htbp] \centering
-\caption{Classifier results including commits and changes as features. Testing was run using 10 fold cross validation.}
-\label{classifier_updated}
-\begin{tabular}{|l|l|l|l|}
-\hline
-~                   & Accuracy & Precision & Recall \\
-    Logistic Regression & 61.1\%   & 43.7\%    & 67.7\% \\
-    Decision Tree       & 64.8\%   & 45.7\%    & 40.9\% \\
-    SVM                 & 70.3\%   & 55.3\%    & 45.3\% \\ \hline
-\end{tabular}
-\end{table}
+\\[-1.8ex] 
+\textit{Note:}
+&
+\multicolumn{1}{r}{$^{*}$p$<$0.1;
+$^{**}$p$<$0.05;
+$^{***}$p$<$0.01}
+\\ 
+\normalsize 
+\end{tabular} 
+\end{table} 
 
 \section{Discussion}\label{discussion}
-The results of the experiments indicate that these social factors are not useful
-to distinguish between merged and not merged pull requests. Visualizing these
-variables as we do in Figure~\ref{social_plot}, this is not surprising. In both
-cases, most of the values for these features are zero. This in itself is an
+Visualizing some variables demonstrates that they may be a poor choice in
+attemping to distinguish between merged and not merged pull requests. In
+Figure~\ref{social_plot}, we see a scatter plot of user activity and the number
+of comments on pull requests for both merged and not merged pull requests. In
+both cases, most of the values for these features are zero. This in itself is an
 interesting observation. In evaluating the types of activity which take place in
 developer joining scripts, ~\cite{von_krogh_community_2003} note that the most
 common type of activity is to join an ongoing technical discussion, rather than
@@ -271,12 +398,29 @@ repository, make changes, and submit the changes for consideration. Previous
 studies on GitHub have shown that the number of contributions did increase for
 some projects that moved from other hosting options to
 GitHub~\cite{mcdonald_performance_2013}. It is possible this interface lowers
-the barrier of entry for a developer who wants to contribute to a project.
+the barrier of entry for a developer who wants to contribute to a project. It is
+also interesting to compare this to Figure~\red{social_plot_repeaters}, which
+shows the same data, but only for those users who later submit another pull
+request. The goal here is to filter out users who may be submitting a one off
+big fix, and focus on users who are interested in becoming members of the
+community by continuing to submit more changes over time. We see a similar
+effect in the scatter plot, however, indicating that even users who will
+continue to contribute multiple pull requests do not necessarily participate
+before submitting, and that there is not much differentiation in these variables
+between those pull requests that get merged and those that do not.
 
 \begin{figure}[p] \centering
 \caption{Visualization of number of comments on a pull request and user
 participation variables. Merged pull requests are blue. Not merged are red.}
 \label{social_plot}
+\includegraphics[scale=0.75]{figures/social_variables.png}
+\end{figure}
+
+\begin{figure}[p] \centering
+\caption{Visualization of number of comments on a pull request and user
+participation variables for pull requests by users who later submitted at least
+one more pull request. Merged pull requests are blue. Not merged are red.}
+\label{social_plot_repeaters}
 \includegraphics[scale=0.75]{figures/social_variables.png}
 \end{figure}
 
@@ -292,36 +436,6 @@ them debate the value of the submitted change. It would be interesting to see if
 inclusion of things like number of people who commented on a pull request and
 analysis of linguistic features along with the number of comments on the pull
 request help make it more predictive.
-
-\section{Conclusion and Future Work}\label{conclusion}
-Although the results of the logistic regression indicate the positive
-correlation posited in our first two hypotheses, the predictive power of that
-model and all our other models are weak, suggesting that these variables are
-not useful to predict whether or not a pull request is merged or not. Future
-work should find better features to improve the accuracy of these predictive
-models.
-
-In this paper, we examined the first pull request users submitted to
-repositories. It might be useful to further discriminate the types of users who
-submit pull requests. ~\cite{nakakoji_evolution_2002} describe eight different
-roles members of an open source community assume, including bug reporter, bug
-fixer, and peripheral developer. In future work, we might continue to examine
-users' first pull requests, but only those users who go on to become active,
-stable members, rather than just one off bug fixers. It may be the case that
-this fixes the problem of our independent variables in both cases clustering
-around 0, if a majority of those cases come from those one time contributors.
-
-Finally, future work should work to identify how the way both contribution by
-members outside the community and acceptance of their changes by those in the
-community change over time. ~\cite{shah_motivation_2006} notes that for new
-members, control and fit are important in deciding whether or not to contribute.
-It may be that as projects grow, more rigid control structures are put in place,
-and contribution patterns change over that time.
-
-In all these cases, GitHub as a social platform enables new forms of
-collaboration and a wealth of data about how that collaboration is taking
-place, and much more work can be done to explore the social nature of the
-collaborative efforts of open source developers.
 
 \bibliographystyle{plain}
 \bibliography{Master}
