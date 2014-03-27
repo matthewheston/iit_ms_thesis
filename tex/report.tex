@@ -1,17 +1,86 @@
-\title{Predicting Pull Request Acceptance on GitHub from Social Factors}
-\author{Matthew Heston}
-\date{}
+\documentclass{iitthesis}
 
-\documentclass[12pt]{article}
-\usepackage{graphicx}
-\usepackage{fixltx2e}
-\usepackage{ntheorem}
-\newtheorem{hyp}{Hypothesis}
+
+% Document Options:
+%
+% Note if you want to save paper when printing drafts,
+% replace the above line by
+%
+%   \documentclass[draft]{iitthesis}
+%
+% See Help file for more about options.
+
+\usepackage{graphicx}    % This package is used for Figures
 
 \begin{document}
-\maketitle
 
-\section{Introduction}
+%%% Declarations for Title Page %%%
+\title{Acceptance of Code Contributors on GitHub}
+\author{Matthew Heston}
+\degree{Master of Science}
+\dept{Information Architecture}
+\date{May 2014}
+% \copyrightnoticetrue      % crate copyright page or not
+%\coadvisortrue           % add co-advisor. activate it by removing % symbol to add co-advisor
+\maketitle                % create title and copyright pages
+
+
+\prelimpages         % Settings of preliminary pages are done with \prelimpages command
+
+
+%%%  Acknowledgement %%%
+\begin{acknowledgement}     % acknowledgement environment, this is optional
+\par  This dissertation could not have been written without Dr. X
+who not only served as my supervisor but also encouraged and
+challenged me throughout my academic program. He and the other
+faculty members, Dr. Y and Dr. Z, guided me through the
+dissertation process, never accepting less than my best efforts. I
+thank them all.\\ \\ (Don't copy this sample text. Write your own
+acknowledgement.)
+% or \input{acknowledgement.tex} % you need a separate acknowledgement.tex file to include it.
+\end{acknowledgement}
+
+
+% Table of Contents
+\tableofcontents
+\clearpage
+
+% List of Tables
+\listoftables
+
+\clearpage
+
+%List of Figures
+\listoffigures
+
+\clearpage
+
+%List of Symbols(optional)
+
+% \listofsymbols
+%  \SymbolDefinition{$\beta$}{probability of non-detecting bad data}
+%  \SymbolDefinition{$\delta$}{Transition Coefficient Constant for the Design of Linear-Phase FIR Filters}
+%  \SymbolDefinition{$\zeta$}{Reflection Coefficient Parameter}
+
+
+%  \clearpage
+
+
+
+%%% Abstract %%%
+\begin{abstract}           % abstract environment, this is optional
+\par Your Abstract goes here!
+% or \input{abstract.tex}  %you need a separate abstract.tex file to include it.
+\end{abstract}
+
+
+\textpages     % Settings of text-pages are done with \textpages command
+
+% Chapters are created with \Chapter{title} command
+\Chapter{INTRODUCTION}
+
+% Section are created with \Section{title} command
+\Section{GitHub} \label{sec:github}
 GitHub is a social website that open source software developers use to host
 their software projects and to browse other developers' projects. It includes
 many features that are present on social networking sites, such as the ability
@@ -24,7 +93,7 @@ learning methods on data from GitHub repositories to explore how different
 social factors may affect the acceptance of code changes from first time
 contributors.
 
-\subsection{Related Work}
+\Section{Related Work}
 GitHub itself has not been extensively studied. ~\cite{choi_herding_2013} use
 data from the website to examine what they call \textit{herding behavior} of
 developers in open source projects.  ~\cite{mcdonald_performance_2013} provide a
@@ -53,8 +122,6 @@ Wikipedia~\cite{bryant_becoming_2005}. Our goal is to provide an empirical
 understanding of community acceptance on a relatively new social platform.
 
 
-
-\paragraph{Outline}
 The remainder of this article is organized as follows.
 Section~\ref{data} begins with a description of some of the terminology specific
 to GitHub, since many of the features in our models rely on an understanding of
@@ -65,16 +132,17 @@ acceptance. Section~\ref{discussion} describes why our models may have failed
 and presents some observations from the data. Finally, Section~\ref{conclusion}
 presents our conclusions and ideas for future work.
 
-\section{Data}\label{data}
+\Chapter{DATA}
 
-\paragraph{Terminology} A software project on the website is referred to as a
-\textit{repository}. Any user on GitHub can \textit{star} a repository. Users
-star repositories to be able to easily navigate to it and to receieve updates on
-activity from the repository. If a developer wants to contribute to another one
-of developer's repositories, he can \textit{fork} the repository, which creates
-a copy of the project for him to work on. As the developer makes changes to this
-code, he \textit{commits} his changes. A \textit{commit} is a snapshot of the
-code at a certain point in time. When the developer is finished, he can submit a
+\Section{Terminology} \label{sec:terms}
+A software project on the website is referred to as a \textit{repository}. Any
+user on GitHub can \textit{star} a repository. Users star repositories to be
+able to easily navigate to it and to receieve updates on activity from the
+repository. If a developer wants to contribute to another one of developer's
+repositories, he can \textit{fork} the repository, which creates a copy of the
+project for him to work on. As the developer makes changes to this code, he
+\textit{commits} his changes. A \textit{commit} is a snapshot of the code at a
+certain point in time. When the developer is finished, he can submit a
 \textit{pull request} to the owner of the project. All pull requests for a
 project are viewable on GitHub, and any user of the site can comment on them. A
 pull request can have a status of open or closed. A status of open indicates
@@ -84,6 +152,7 @@ changes the developer made, he can \textit{merge} them into the repository. A
 pull request can be closed without being merged, which means that the changes
 the developer made were not accepted.
 
+\Section{Data Collection}
 Data was collected using the GitHub API.\footnote{http://developer.github.com/}
 We collected pull requests from 45 different repositories. The repositories
 selected came from the top 100 most starred repositories on GitHub. We chose
@@ -95,349 +164,163 @@ pull requests. Of these, 4,352, or 32.5\% of the pull requests were merged. We
 consider several features, both on the pull request itself as well as the
 repository.
 
-\subsection{User Participation}
-In their study on members of Wikipedia, ~\cite{bryant_becoming_2005} note that
-members initially become involved through peripheral activities. These are
-simple and low risk activities members can take part in to learn more about the
-community before trying to become major contributors. Similarly,
+\Chapter{METHODS}
+
+\Section{Communities of Practice}
+~\cite{lave_situated_1991} describe learning in communities of practice as
+taking place through a process of \textit{legitimate peripheral participation},
+wherein newcomers join a community by participating in peripheral tasks and
+forming relationships to move towards the center of the community. This concept
+has been explored in many studies of computer mediated communication.  In their
+study on members of Wikipedia, ~\cite{bryant_becoming_2005} note that members
+initially become involved through peripheral activities. These are simple and
+low risk activities members can take part in to learn more about the community
+before trying to become major contributors. Similarly,
 ~\cite{von_krogh_community_2003} from observing open source communities generate
 the construct of a \textit{joining script}, where each project has a set of
 tasks for new developers to go through before being accepted into the community.
-In the case of GitHub, we consider the act of commenting on previous pull
-requests to be the main peripheral activity a user can participate in before
-submitting a pull request of their own. For each pull request in our data set,
-we then count the number of previous pull request discussions the user
-participated in before submitting their own pull request, and present our first
-hypothesis.
+In a discussion of successful developers on the Python project,
+~\cite{ducheneaut_socialization_2005} describe the first steps of their
+trajectory as including peripheral monitoring of development activity and
+reporting of bugs.
 
-\begin{hyp}
-Community members who have been active in previous discussions are more likely
-to have their code changes accepted.
-\end{hyp}
+We consider the main peripheral activity a user can participate in on GitHub is
+commenting on other pull requests. For each first pull request in our dataset,
+we count the number of other pull requests the user commented on before
+submitting. Based on the these previous findings, we would expect to see a
+positive correlation between this number and the likelihood that a pull request
+is recieved. We also count the number of comments that each first pull request
+recieves, with the assumption that this variable can be used to measure the
+amount of community interest in a given pull request. We plot these variables in
+Figure~\ref{fig:aprr_up}.
 
-\subsection{Reputation of User}
-In addition to participation within the community, we also suspect that a
-developer's reputation can affect whether or not his pull request is accepted.
-In particular, we hypothesize that a user who has popular projects of his own is
-more likely have his pull requests accepted. To measure this property, we use
-the total number of stars a user's repositories has received. This seems to be a
-good proxy for measuring the popularity of projects. Unfortunately, we cannot
-retrieve historical data for stars from the GitHub API. It is therefore not
-possible to know how many stars a user's projects had at the time he submitted
-his pull request. We do, however, know the when repositories were created.
-Therefore, to measure a user's reputation, we look at repositories that were
-created at the time his pull request was submitted, and sum the current number
-of stars those projects have at the time our data was collected. This is not a
-perfect approximation, as some of these projects may have gained many more stars
-long after the pull request was submitted. However, since we cannot access
-historical data, we rely on this as an approximation for user reputation.
+\Subsection{User Participation}
+We see that user participation for the majority of all first pull requests, both
+merged and not merged, is 0. This indicates that in general, most users are not
+attempting to engage in the peripheral activity of commenting on other pull
+requests before submitting their own. The GitHub interface makes it relatively
+easy for a user to fork a repository, make changes, and submit the changes for
+consideration. Previous studies on GitHub have shown that the number of
+contributions did increase for some projects that moved from other hosting
+options to GitHub~\cite{mcdonald_performance_2013}. It is possible this
+interface lowers the barrier of entry for a developer who wants to contribute to
+a project, and allows them to bypass participating in the joining script
+described by ~\cite{von_krogh_community_2003}.
 
-\begin{hyp}
-Community members who have other popular projects are more likely to have their
-code changes accepted.
-\end{hyp}
+We also examine these variables for first pull requests by users who later
+submit another pull request. Our intuition here is that some users might
+encounter a bug they fix or desire a feature that they implement, and then
+submit these changes back to repository. They may not comment on other pull
+requests as they are not interested in becoming long term members of the
+community, but rather are just interested in submitting a one time patch.
+Figure~\ref{fig:aprr_up_repeaters} shows a visualization of the same first pull
+requests, but only for users who submit at least one other pull request at a
+later point in our data set, and Figure~\ref{fig:aprr_up_repeaters_5} shows the
+data for users who submit at least 10 more times. Looking at users who submit
+at least one other time cuts our number of observations from 13,383 to 5,207,
+indicating that approximately 61\% of these pull requests come from users who
+will not contribute any others. Looking at users who will submit at least 10
+more times gives us a total of 1,155 observations.
 
-\subsection{Attention Pull Request Recieves}
-We consider the attention the pull request receives, which we measure as the
-total number of comments on the pull request. Our intuition is that a high
-number of comments indicates the pull request is generating interest within the
-community and is therefore more likely to be merged.
+It is clear that in all these cases, regardless of whether or not they will be
+continuing to submit other pull requests later, at the time of submitting their
+first pull request, users are generally not participating in the community. The
+previous graphs only consider the number of pull requests a user commented on
+before submitting their first pull request, so we do not capture how users who
+submit multiple pull request over time comment on other pull requests over time.
+In Figure~\ref{fig:commented_pullrequests_totals} we plot the total number of
+others' pull requests that a user commented on by how many pull requests they
+submitted themselves, considering only users who have submitted at least two
+pull requests. There is not a strong correlation between these variables
+(Spearman's $\rho$  = 0.44), indicating that users do not necessarily
+participate in more commenting as they continue to submit more pull requests.
 
-\begin{hyp}
-Pull requests with a high number of comments are more likely to be accepted.
-\end{hyp}
+\begin{figure}[p] \centering \label{fig:aprr_up}
+\includegraphics[scale=0.6]{figures/aprr_up_ggplot.png} \caption{User
+participation and attention a pull request recieves for all first pull
+requests.} \end{figure}
 
-\subsection{Number of Other Contributors}
+\begin{figure}[p] \centering \label{fig:aprr_up_repeaters}
+\includegraphics[scale=0.6]{figures/aprr_up_repeaters_ggplot.png} \caption{User
+participation and attention a pull request recieves variables for users who
+submit at least one other pull request in our data set.} \end{figure}
+
+\begin{figure}[p] \centering \label{fig:aprr_up_repeaters_10}
+\includegraphics[scale=0.6]{figures/aprr_up_repeaters_10_ggplot.png}
+\caption{User participation and attention a pull request recieves variables for
+users who submit at least 10 other pull requests in our data set.} \end{figure}
+
+\begin{figure}[p] \centering \label{fig:commented_pullrequests_totals}
+\includegraphics[scale=0.6]{figures/commented_pullrequests_totals_ggplot.png}
+\caption{Total number of pull requests commented on and total number of pull
+requests submitted for each user.} \end{figure}
+
+\Subsection{Attention Pull Request Receives}
+In Figure~\ref{fig:aprr_up}, we see more variance in the number of comments on
+first pull requests than we did with the number of pull requests users commented
+on before submitting. However, there is clearly no linear separation of merged
+and not merged pull requests using this variable, so it seems just viewing the
+amount of activity a pull request receives is not enough to explain whether or
+not it gets merged.
+
+To test whether or not the content of these comments is predictive of whether or
+not a pull request is merged, we collect the comments for each of our first pull
+requests. We ignore comments made by the user who submitted the pull request,
+since we are interested in what other users had to say about it. We also ignore
+the last comment associated with a pull request, since these often will
+explicitly say whether or not the maintainer is merging the pull request or not.
+We are more interested in if the type of language used in the discussion of a
+pull request is predictive of whether or not it is accepted. We ignore pull
+requests that only have one comment associated with it. This gives us a sample
+size of 5,674. 3,811, approximately 67\% are unmerged. We treat the remaining
+comments associated with the pull request as one document, and convert them into
+feature vectors representing the count of each unigram and bigram in the
+documents, and train both a logistic regression and naive bayes classifier using
+this feature set. The results of testing these classifiers is shown in
+Table~\ref{tbl:classifiers}. The results shown are the result of running 10-fold
+cross validation. The low recall rates indicate that data we have is not
+sufficient to distinguish positive cases. Of course, our sample size of 5,674 is
+relatively small, but it is interesting to note that only 42\% of the first pull
+requests in our data set have more than 1 comment associated with them.
+
+\begin{table} \centering \label{tbl:classifiers}
+  \begin{tabular}{lll}
+  ~         & Logistic Regression & Naive Bayes \\
+  Accuracy  & 69.6\%              & 70.6\%      \\
+  Precision & 56.0\%              & 60.3\%      \\
+  Recall    & 36.1\%              & 30.7\%      \\
+  \end{tabular}
+\end{table}
+
+
+
+\Section{First Mover Advantage}
 ~\cite{viegas_studying_2004} find what they call a \textit{first-mover
 advantage} in the editing of Wikipedia articles, wherein the first contribution
 to a page tends to survive longer and recieve less modifications than following
-contributions. They hypothesize that the first user sets the tone of the article
-and their contributions therefore are more likely to survive. We predict a
-similar effect in pull requests, where the first persons to submit pull requests
-are more likely to be accepted.
-
-\begin{hyp}
-The likelihood a pull request is accepted declines as the number of contributors
-to a repository increases.
-\end{hyp}
-
-\subsection{Number of Previous Commits}
-Similar to the above hypothesis, we also measure the number of commits that have
-occurred in a repository prior the submission of the pull request. In addition
-to counting the number of previous contributors, we believe that commits here
-can be used as an estimate of how much activity has taken place in a codebase,
-and that as more activity occurs and project complexity grows, the likelihood of
-a pull request being accepted decreases.
-
-\begin{hyp}
-The likelihood a pull request is accepted declines as the number of commits to a
-repository increases.
-\end{hyp}
-
-\subsection{Size of the Pull Request}
-We use two metrics to measure the size of the commit, both the number of commits
-and the number of changes. As mentioned previously, a commit is a snapshot of
-the code at a certain point in time. Different developers might have different
-commit habits, but in general, larger changes will probably include more
-commits. The number of changes is calculated simply as the number of lines added
-and the number of lines deleted. As an example to help differentiate these two
-metrics, imagine the scenario of changing the name of a widely used variable
-across the code base. Every line where this variable name appears would be
-treated as being deleted and re-added using the new variable name by git,
-resulting in a large number of changes. The developer, however, would likely
-only make one commit to capture this change. We predict that smaller pull
-requests are more likely to be accepted, since they can be reviewed quickly and
-are unlikely to introduce new complexity.
-
-\begin{hyp}
-The likelihood a pull request is accepted declines as the size of the pull
-request increases.
-\end{hyp}
-
-\section{Methods}\label{methods}
-To test the relationship between the variables identified in Section~\ref{data},
-we apply a logistic regression model using these variables as indepedent
-variables and the binary outcome of merged or not as the dependent variable. We
-create categorical independent variables by binning the data. The results from
-the regression are shown in Table~\ref{logit}. In general, we do see the
-correlations we expect in the model, with the exception of the number of
-comments that the pull request receives, where we see a negative correlation. 
-
-Examining the decrease in deviance from the null deviance from our parameters
-indicates our model significantly ourperforms a null model. However, the
-$\chi^{2}$ value for the residual deviance is approximately equal to 1,
-indicating that the logit model overall may be a poor fit.
+contributions.
 
 
-\begin{table}[!htbp] \tiny \centering 
-\caption{Logistic Regression Results} 
-\label{logit} 
-\begin{tabular}{@{\extracolsep{5pt}}lc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
-& \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-2} 
-\\[-1.8ex] & merged \\ 
-\hline \\[-1.8ex] 
-User participation\textsubscript{1} & 0.242 \\ 
-& (0.421) \\ 
-& \\ 
-User participation\textsubscript{2} & 0.912$^{*}$ \\ 
-& (0.513) \\ 
-& \\ 
-User participation\textsubscript{3} & 1.729$^{***}$ \\ 
-& (0.617) \\ 
-& \\ 
-Attention pull request receives\textsubscript{1} & $-$0.795$^{***}$
-\\ 
-& (0.155) \\ 
-& \\ 
-Attention pull request receives\textsubscript{2} & $-$0.053 \\ 
-& (0.325) \\ 
-& \\ 
-Attention pull request receives\textsubscript{3} & $-$0.019
-\\ 
-& (0.524) \\ 
-& \\ 
-User reputation\textsubscript{1} & 0.185$^{*}$
-\\ 
-& (0.101) \\ 
-& \\ 
-User reputation\textsubscript{2} &
-0.192 \\ 
-& (0.130) \\ 
-& \\ 
-User reputation\textsubscript{3}
-& 0.342$^{**}$ \\ 
-& (0.143) \\ 
-& \\ 
-Number of commits\textsubscript{1}
-& $-$1.195$^{***}$ \\ 
-& (0.416) \\ 
-& \\ 
-Number of commits\textsubscript{2}
-& $-$3.218$^{***}$ \\ 
-& (1.013) \\ 
-& \\ 
-Number of commits\textsubscript{3}
-& $-$13.219 \\ 
-& (114.104) \\ 
-& \\ 
-Number of changes\textsubscript{1}
-&
-$-$0.221$^{**}$
-\\ 
-& (0.108) \\ 
-& \\ 
-Number of changes\textsubscript{2}
-&
-$-$0.609$^{***}$
-\\ 
-&
-(0.148)
-\\ 
-& \\ 
-Number of changes\textsubscript{3}
-&
-$-$0.620$^{***}$
-\\ 
-&
-(0.192)
-\\ 
-&
-\\ 
-Number of repository commits\textsubscript{1}
-&
-$-$0.306$^{***}$
-\\ 
-&
-(0.050)
-\\ 
-&
-\\ 
-Number of repository commits\textsubscript{2}
-&
-$-$0.037
-\\ 
-&
-(0.060)
-\\ 
-&
-\\ 
-Number of repository commits\textsubscript{3}
-&
-0.245$^{***}$
-\\ 
-&
-(0.085)
-\\ 
-&
-\\ 
-Number of contributors\textsubscript{1}
-&
-$-$0.103$^{*}$
-\\ 
-&
-(0.055)
-\\ 
-&
-\\ 
-Number of contributors\textsubscript{2}
-&
-$-$0.657$^{***}$
-\\ 
-&
-(0.098)
-\\ 
-&
-\\ 
-Number of contributors\textsubscript{3}
-&
-$-$0.526$^{***}$
-\\ 
-&
-(0.140)
-\\ 
-&
-\\ 
-Constant
-&
-$-$0.547$^{***}$
-\\ 
-&
-(0.031)
-\\ 
-&
-\\ 
-\hline
-\\[-1.8ex] 
-Observations
-&
-13,383
-\\ 
-Log
-Likelihood
-&
-$-$8,282.562
-\\ 
-Akaike
-Inf.
-Crit.
-&
-16,609.120
-\\ 
-\hline 
-\hline
-\\[-1.8ex] 
-\textit{Note:}
-&
-\multicolumn{1}{r}{$^{*}$p$<$0.1;
-$^{**}$p$<$0.05;
-$^{***}$p$<$0.01}
-\\ 
-\normalsize 
-\end{tabular} 
-\end{table} 
+\clearpage
 
-\section{Discussion}\label{discussion}
-Visualizing some variables demonstrates that they may be a poor choice in
-attemping to distinguish between merged and not merged pull requests. In
-Figure~\ref{social_plot}, we see a scatter plot of user activity and the number
-of comments on pull requests for both merged and not merged pull requests. In
-both cases, most of the values for these features are zero. This in itself is an
-interesting observation. In evaluating the types of activity which take place in
-developer joining scripts, ~\cite{von_krogh_community_2003} note that the most
-common type of activity is to join an ongoing technical discussion, rather than
-suggest a technical solution. In a discussion of successful developers on the
-Python project, ~\cite{ducheneaut_socialization_2005} describe the first steps
-of their trajectory as including peripheral monitoring of development activity
-and reporting of bugs. In both cases, developers first participate in peripheral
-activities. Both of these studies examine CVS repositories and project mailing
-lists. The GitHub interface makes it relatively easy for a user to fork a
-repository, make changes, and submit the changes for consideration. Previous
-studies on GitHub have shown that the number of contributions did increase for
-some projects that moved from other hosting options to
-GitHub~\cite{mcdonald_performance_2013}. It is possible this interface lowers
-the barrier of entry for a developer who wants to contribute to a project. It is
-also interesting to compare this to Figure~\red{social_plot_repeaters}, which
-shows the same data, but only for those users who later submit another pull
-request. The goal here is to filter out users who may be submitting a one off
-big fix, and focus on users who are interested in becoming members of the
-community by continuing to submit more changes over time. We see a similar
-effect in the scatter plot, however, indicating that even users who will
-continue to contribute multiple pull requests do not necessarily participate
-before submitting, and that there is not much differentiation in these variables
-between those pull requests that get merged and those that do not.
 
-\begin{figure}[p] \centering
-\caption{Visualization of number of comments on a pull request and user
-participation variables. Merged pull requests are blue. Not merged are red.}
-\label{social_plot}
-\includegraphics[scale=0.75]{figures/social_variables.png}
-\end{figure}
+%
+% APPENDIX
+%
 
-\begin{figure}[p] \centering
-\caption{Visualization of number of comments on a pull request and user
-participation variables for pull requests by users who later submitted at least
-one more pull request. Merged pull requests are blue. Not merged are red.}
-\label{social_plot_repeaters}
-\includegraphics[scale=0.75]{figures/social_variables.png}
-\end{figure}
+% Do the settings of appendices with \appendix command
+\appendix
 
-Another interesting observation is the negative relationship between the number
-of comments on a pull request and the likelihood of it being merged. Manual
-inspection of some of these pull requests suggests there are several causes for
-this. For example, it may be the case that the owner of a repository is not
-interested in merging a change, but other community members think the change is
-valuable, so they leave comments on the pull request to encourage the repository
-owner to merge it. In other cases, a discussion might develop between only the
-person who submitted the pull request and the repository owner where the two of
-them debate the value of the submitted change. It would be interesting to see if
-inclusion of things like number of people who commented on a pull request and
-analysis of linguistic features along with the number of comments on the pull
-request help make it more predictive.
+% Then create each appendix using
+% \Appendix{title_of_appendix} command
+%
+% BIBLIOGRAPHY
+%
+% you have two options: 1) create bibliography manually,
+% 2) create bibliography automatically. See BibliographyHelp.pdf file for details.
+
 
 \bibliographystyle{plain}
 \bibliography{Master}
 
-\end{document}
+\end{document}  % end of document
