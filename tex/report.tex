@@ -193,15 +193,17 @@ In a discussion of successful developers on the Python project,
 trajectory as including peripheral monitoring of development activity and
 reporting of bugs.
 
-We consider the main peripheral activity a user can participate in on GitHub is
-commenting on other pull requests. For each first pull request in our dataset,
-we count the number of other pull requests the user commented on before
-submitting. Based on the these previous findings, we would expect to see a
-positive correlation between this number and the likelihood that a pull request
-is recieved. We also count the number of comments that each first pull request
-recieves, with the assumption that this variable can be used to measure the
-amount of community interest in a given pull request. We plot these variables in
-Figure~\ref{fig:aprr_up}.
+In this section, we explore both how a user engages with the community before
+submitting their pull request, as well as try to measure the community response
+to the pull request.  We consider the main peripheral activity a user can
+participate in on GitHub is commenting on other pull requests. For each first
+pull request in our dataset, we count the number of other pull requests the user
+commented on before submitting. Based on the these previous findings, we would
+expect to see a positive correlation between this number and the likelihood that
+a pull request is recieved. We also count the number of comments that each first
+pull request recieves, with the assumption that this variable can be used to
+measure the amount of community interest in a given pull request. We plot these
+variables in Figure~\ref{fig:aprr_up}.
 
 \Subsection{User Participation}
 We see that user participation for the majority of all first pull requests, both
@@ -224,8 +226,8 @@ requests as they are not interested in becoming long term members of the
 community, but rather are just interested in submitting a one time patch.
 Figure~\ref{fig:aprr_up_repeaters} shows a visualization of the same first pull
 requests, but only for users who submit at least one other pull request at a
-later point in our data set, and Figure~\ref{fig:aprr_up_repeaters_5} shows the
-data for users who submit at least 10 more times. Looking at users who submit
+later point in our data set, and Figure~\ref{fig:aprr_up_repeaters_10} shows the
+data for users who submit at least 5 more times. Looking at users who submit
 at least one other time cuts our number of observations from 13,383 to 5,207,
 indicating that approximately 61\% of these pull requests come from users who
 will not contribute any others. Looking at users who will submit at least 10
@@ -287,12 +289,13 @@ feature vectors representing the count of each unigram and bigram in the
 documents, and train both a logistic regression and naive bayes classifier using
 this feature set. The results of testing these classifiers is shown in
 Table~\ref{tbl:classifiers}. The results shown are the result of running 10-fold
-cross validation. The low recall rates indicate that data we have is not
+cross validation. The low recall rates indicate that the text data is not
 sufficient to distinguish positive cases. Of course, our sample size of 5,674 is
 relatively small, but it is interesting to note that only 42\% of the first pull
 requests in our data set have more than 1 comment associated with them.
 
-\begin{table} \centering \label{tbl:classifiers}
+\begin{table}[ht] \centering \label{tbl:classifiers}
+  \caption{Classifier results}
   \begin{tabular}{lll}
   ~         & Logistic Regression & Naive Bayes \\
   Accuracy  & 69.6\%              & 70.6\%      \\
