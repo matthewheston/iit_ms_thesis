@@ -81,6 +81,7 @@ acknowledgement.)
 
 % Section are created with \Section{title} command
 \Section{GitHub} \label{sec:github}
+
 GitHub is a social website that open source software developers use to host
 their software projects and to browse other developers' projects. It includes
 many features that are present on social networking sites, such as the ability
@@ -92,7 +93,8 @@ features all on one website.  In this study, we use statistical and machine
 learning methods on data from GitHub repositories to explore how different
 factors may affect the acceptance of code changes from first time contributors.
 
-\Section{Related Work}
+\Section{Related Work} \label{sec:relatedwork}
+
 GitHub itself has not been extensively studied. ~\cite{choi_herding_2013} use
 data from the website to examine what they call \textit{herding behavior} of
 developers in open source projects.  ~\cite{mcdonald_performance_2013} provide a
@@ -123,6 +125,7 @@ understanding of community acceptance on a relatively new social platform.
 \Chapter{DATA}
 
 \Section{Terminology} \label{sec:terms}
+
 A software project on the website is referred to as a \textit{repository}. Any
 user on GitHub can \textit{star} a repository. Users star repositories to be
 able to easily navigate to it and to receieve updates on activity from the
@@ -140,7 +143,8 @@ changes the developer made, he can \textit{merge} them into the repository. A
 pull request can be closed without being merged, which means that the changes
 the developer made were not accepted.
 
-\Section{Data Collection}
+\Section{Data Collection} \label{sec:datacollection}
+
 Data was collected using the GitHub API.\footnote{http://developer.github.com/}
 We collected pull requests from 45 different repositories. The repositories
 selected came from the top 100 most starred repositories on GitHub. We chose
@@ -163,7 +167,8 @@ searching commit comments for certain text patterns. This results in finding
 
 \Chapter{METHODS}
 
-\Section{Communities of Practice}
+\Section{Communities of Practice} \label{sec:communities}
+
 ~\cite{lave_situated_1991} describe learning in communities of practice as
 taking place through a process of \textit{legitimate peripheral participation},
 wherein newcomers join a community by participating in peripheral tasks and
@@ -294,7 +299,8 @@ requests in our data set have more than 1 comment associated with them.
 
 
 
-\Section{First Mover Advantage}
+\Section{First Mover Advantage} \label{sec:firstmover}
+
 ~\cite{viegas_studying_2004} find what they call a \textit{first-mover
 advantage} in the editing of Wikipedia articles, wherein the first contribution
 to a page tends to survive longer and recieve less modifications than following
