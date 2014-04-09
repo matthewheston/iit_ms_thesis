@@ -79,21 +79,99 @@ acknowledgement.)
 % Chapters are created with \Chapter{title} command
 \Chapter{INTRODUCTION}
 
-% Section are created with \Section{title} command
-\Section{GitHub} \label{sec:github}
-
 GitHub is a social website that open source software developers use to host
 their software projects and to browse other developers' projects. It includes
 many features that are present on social networking sites, such as the ability
-to follow other users and leave comments on projects. In the study of computer
-supported cooperative work, GitHub provides a wealth of data, as it is a
+to follow other users and leave comments on projects. GitHub provides a wealth
+of data for studying computer supported cooperative work, as it is a
 centralized location where many different tasks take place. For example, users
 can create bug reports, submit fixes, and engage in discussions about new
 features all on one website.  In this study, we use statistical and machine
 learning methods on data from GitHub repositories to explore how different
 factors may affect the acceptance of code changes from first time contributors.
 
+The rest of this paper is organized as follows. The rest of this chapter
+provides a literature review on the subject, establishing the importance of
+studying open source software development, situating it within a context of
+virtual work and computer mediated communication, and reviewing a theoretical
+basis we use to inform our empirical methods. Chapter~\ref{chap:methods}
+describes our data collection and data analysis methods. The results of our
+experiments are discussed in Chapter~\ref{chap:results}. We conclude in
+Chapter~\ref{chap:conclusion} and discuss opportunities for future work.
+
+
 \Section{Related Work} \label{sec:relatedwork}
+
+\Subsection{FLOSS Research}
+Research in the development of free/libre open source software (FLOSS) has
+grown tremendously in the last several years. Crowston et
+al.~\cite{crowston_free/libre_2008} note the importance of understanding FLOSS
+development as it becomes a major social movement with many volunteers
+contributing to projects, and many FLOSS projects becoming integral parts of the
+infrastructure of modern societ as it becomes a major social movement with many
+volunteers contributing to projects, and many FLOSS projects becoming
+integral parts of the infrastructure of modern society. Other studies have
+emphasized the role that FLOSS research can play in improving current existing
+research of software engineering, particularly as the importance of
+understanding large scale software systems in science and insustry
+increases ~\cite{scacchi_free/open_2007}.
+
+Existing research approaches FLOSS from many different angles, including
+motivation of open source
+developers~\cite{fang_understanding_2009},
+~\cite{lakhani_why_2003},~\cite{shah_motivation_2006}; governance of open souce
+projects~\cite{hippel_open_2003},~\cite{omahony_guarding_2003},~\cite{omahoney_governance_2007};
+and knowledge sharing within FLOSS
+communities~\cite{endres_tacit_2007},~\cite{hemetsberger_collective_2009},~\cite{sowe_understanding_2008}.
+Our study focuses on the behavior of first time contributors to FLOSS projects
+and community response to their contributions. We build on previous studies that
+describe the social processes of community
+joining~\cite{ducheneaut_socialization_2005},~\cite{huang_mining_2005}, ~\cite{von_krogh_community_2003}. Given the
+distributed nature of FLOSS development, our findings contribute to current
+descriptions of virtual work and distributed teams.
+%TODO new members
+
+Previous studies have used version control histories to verify learning
+processes of new members in FLOSS projects~\cite{huang_mining_2005}. GitHub,
+however, has not been extensively studied as it is a relatively new social
+platform. Dabbish et al.~\cite{dabbish_social_2012} study how GitHub as a social
+application provides transparency and how that transparency affects
+collaboration and learning. McDonald and
+Goggins~\cite{mcdonald_performance_2013} study how different communities on
+GitHub measure success. Choi et al.~\cite{choi_herding_2013} study a sample of
+GitHub based projects to contribute to theories of developer coordination. In
+all these cases, the social features of GitHub, e.g. the ability to follow other
+users and view information about them, provide new ways to study social behavior
+in FLOSS projects. Our study investigates members' participation in group
+discussions on the site. While previous studies have tried to combine data from
+mailing lists and version control~\cite{ducheneaut_socialization_2005}, GitHub
+provides a centralized location to study communities in which discussion and
+code contribution all occur in one place. At least with regards to user support,
+recent research suggests that developers may be moving away from mailing lists
+to social Q\&A sites to respond to user requests for
+help~\cite{vasilescu_how_2014}. By focusing on GitHub data, we contribute to
+understanding developer behavior on this new social platform.
+
+
+\Subsection{Communities of Practice} \label{sec:communities}
+
+~\cite{lave_situated_1991} describe learning in communities of practice as
+taking place through a process of \textit{legitimate peripheral participation},
+wherein newcomers join a community by participating in peripheral tasks and
+forming relationships to move towards the center of the community. This concept
+has been explored in many studies of computer mediated communication.  In their
+study on members of Wikipedia, ~\cite{bryant_becoming_2005} note that members
+initially become involved through peripheral activities. These are simple and
+low risk activities members can take part in to learn more about the community
+before trying to become major contributors. Similarly,
+~\cite{von_krogh_community_2003} from observing open source communities generate
+the construct of a \textit{joining script}, where each project has a set of
+tasks for new developers to go through before being accepted into the community.
+In a discussion of successful developers on the Python project,
+~\cite{ducheneaut_socialization_2005} describe the first steps of their
+trajectory as including peripheral monitoring of development activity and
+reporting of bugs.
+
 
 GitHub itself has not been extensively studied. ~\cite{choi_herding_2013} use
 data from the website to examine what they call \textit{herding behavior} of
@@ -122,7 +200,7 @@ other computer mediated collaborative contexts, such as
 Wikipedia~\cite{bryant_becoming_2005}. Our goal is to provide an empirical
 understanding of community acceptance on a relatively new social platform.
 
-\Chapter{DATA}
+\Chapter{METHODS} \label{chap:methods}
 
 \Section{Terminology} \label{sec:terms}
 
@@ -165,7 +243,7 @@ comments, so we use some naive heuristics for identifying these requests by
 searching commit comments for certain text patterns. This results in finding
 5,239, or 39.1\% of first pull requests being merged.
 
-\Chapter{METHODS}
+\Chapter{RESULTS} \label{chap:results}
 
 \Section{Communities of Practice} \label{sec:communities}
 
