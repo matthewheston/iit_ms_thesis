@@ -419,23 +419,96 @@ associated with them. Our research question that drove these experiments was how
 community response affects whether or not a pull request is accepted. However,
 we see that the majority of pull requests don't attract any community attention.
 
+\Chapter{Conclusion} \label{chap:conclusion}
 
+In this study, we analyzed community engagement and community response of first
+time code contributors on GitHub. We found that most developers do not engage by
+participating in discussions on GitHub before submitting code changes. We also
+find that most submitted pull requests do not attract much community response,
+and our attempts at measuring communtiy response do not provide good predictors
+for whether or not a pull request is accepted. Our findings have implications
+for researchers, open source contributors, and open source project maintainers.
 
-% \Section{First Mover Advantage} \label{sec:firstmover}
+We found that most users do not engage with the community in the way we expected
+from previous FLOSS and LPP literature. Some reasons for this are discussed
+below in Section~\ref{sec:future_work}. Since GitHub is a new platform that
+encourages new types of social interactions, it can be used as a new source of
+data to study open source communities. Our study focused on a relatively small
+number of repositories pulled from the most starred repositories on GitHub.
+Further work should be done on a larger sample of different types of
+repositories. It's possible that new types of social websites like GitHub will
+require new theoretical ways of thinking about distributed work and virtual
+teams.
 
-% ~\cite{viegas_studying_2004} find what they call a \textit{first-mover
-% advantage} in the editing of Wikipedia articles, wherein the first contribution
-% to a page tends to survive longer and recieve less modifications than following
-% contributions. In this section, we explore how the acceptance of pull requests
-% changes over time.
+The majority of first pull requests in our data set were not accepted, but
+community engagement is not a good predictor or whether or not they are
+accepted, and most developers do not engage before submitting a pull request,
+even if they end up becoming active code contributors. The implication for
+developers who want to become involved in an open source project on GitHub is
+that they do not necessarily need to participate in peripheral activities before
+submitting pull requests. Although our study did not identify which factors do
+contribute to acceptance of pull request, it's possible that developers should
+focus more on things like finding relevant issues to fix or features to work on
+rather than on social interactions.
 
-% In Figure~\ref{fig:acceptance_over_time}, we plot the average number of both
-% merged and unmerged pull requests over a 12 month period.
+Many open source projects fail due to insufficient volunteer
+participation~\cite{crowston_defining_2003},~\cite{krishnamurthy_cave_2002}. It
+is therefore important for project maintainers to continue to attract volunteer
+developers to keep a project alive. We found that 61\% of first pull requests
+in our data set come from users who will not submit any other pull requests.
+Project owners should consider ways to convert these one time contributers to
+regular active contributors.
 
-% \begin{figure}[p] \centering \label{fig:acceptance_over_time}
-% \includegraphics[scale=0.6]{figures/merged_over_time_excel.png}
-% \caption{Average number of merged and not merged pull requests over 12 months.}
-% \end{figure}
+\Section{Future Work} \label{sec:future_work}
+
+Our major finding in this study is that, despite previous FLOSS research which
+did indicate social patterns that follow legitimate peripheral participation
+framework~\cite{ducheneaut_socialization_2005},~\cite{huang_mining_2005},~\cite{ye_toward_2003},
+we generally do not see this pattern in our GitHub data set. Although some
+developers do leave comments on other pull requests before submitting their own,
+the majority of developers do not, including those that will continue to submit
+code changes. There are many reasons this might be the case.
+
+As mentioned in Section~\ref{results_engagement}, GitHub's interface makes it
+fairly easy to submit changes. Users only need to click a button to create a
+copy of the repository that they can make commits on, and then click another
+button to submit those commits as a pull request when they are finished. This
+process may lower barriers to entry for new developers. While previous studies
+of FLOSS communities have focused on mailing lists and centralized version
+control repositories, the distributed nature of git may be altering the social
+patterns that take place in developer networks. This study may suggest we need
+to alter existing social theory as new interfaces change social interactions.
+
+However, this study only focused on data from GitHub, and our notion of
+community engagement by developers was limited to activity by developers on
+GitHub. While we have shown that this data is not sufficient to predict whether
+or not a pull request is merged, further studies should create joint data sets
+merging GitHub data with data from other sources, such as mailing lists, forums,
+or chat rooms to test whether or not developers engage with the community using
+these other platforms, and how those social interactions affect their acceptance
+in the community. One difficulty in creating these types of data sets is
+identify merging, the process of matching different logins from different
+services to the same physical person, but a number of techniques have been
+proposed to assist in this
+process~\cite{bird_open_2007},~\cite{goeminne_comparison_2013},~\cite{kouters_whos_2012}.
+
+It's also possible that looking at only social factors is not enough to
+understand what contributes to acceptance on GitHub. Static analysis tools may
+be used in addition to the metrics we used in this study to further explore how
+the code itself affects whether or not a pull request is accepted.
+
+In addition to studying community engagement by developers, we also examined
+community response to these developers. In most cases, there was little
+community response. As mentioned above, attraction of new developers and
+retention of developers is important to project success. Future work should how
+community response can affect developer retention in GitHub projects.
+
+To better understand the way that the GitHub interface affects developer
+behavior will require further qualitative study. While there have been surveys
+of GitHub developers previously~\cite{mcdonald_performance_13}, there remains a
+lot of work left to do in this area. Future quantitative studies should collect
+larger samples of data and explore new ways of measuring these types of social
+variables.
 
 \clearpage
 
