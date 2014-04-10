@@ -16,7 +16,8 @@
 \begin{document}
 
 %%% Declarations for Title Page %%%
-\title{Acceptance of Code Contributors on GitHub}
+\title{Community Engagement and Community Response \\
+of First Time Code Contributors on GitHub}
 \author{Matthew Heston}
 \degree{Master of Science}
 \dept{Information Architecture}
@@ -31,13 +32,15 @@
 
 %%%  Acknowledgement %%%
 \begin{acknowledgement}     % acknowledgement environment, this is optional
-\par  This dissertation could not have been written without Dr. X
-who not only served as my supervisor but also encouraged and
-challenged me throughout my academic program. He and the other
-faculty members, Dr. Y and Dr. Z, guided me through the
-dissertation process, never accepting less than my best efforts. I
-thank them all.\\ \\ (Don't copy this sample text. Write your own
-acknowledgement.)
+\par  I want to thank my advisor Dr. Libby Hemphill for her support both in my
+completion of this thesis and also throughout my studies here at IIT. Her
+support and guidance have given me the desire to continue a career in research
+as well as the tools necessary to conduct research properly. I also want to
+thank my committee members Karl Stolley, who assisted me in the design of the
+tools I used in collecting data for this thesis as well as analyzing the data,
+and Aron Culotta, who provided a great deal of valuable feedback in my initial
+studies of GitHub data. Finally, I want to thank my parents, Robert and Susan
+Heston, for their continued support during my academic career.
 % or \input{acknowledgement.tex} % you need a separate acknowledgement.tex file to include it.
 \end{acknowledgement}
 
@@ -56,22 +59,18 @@ acknowledgement.)
 
 \clearpage
 
-%List of Symbols(optional)
-
-% \listofsymbols
-%  \SymbolDefinition{$\beta$}{probability of non-detecting bad data}
-%  \SymbolDefinition{$\delta$}{Transition Coefficient Constant for the Design of Linear-Phase FIR Filters}
-%  \SymbolDefinition{$\zeta$}{Reflection Coefficient Parameter}
-
-
-%  \clearpage
-
 
 
 %%% Abstract %%%
 \begin{abstract}           % abstract environment, this is optional
-\par Your Abstract goes here!
-% or \input{abstract.tex}  %you need a separate abstract.tex file to include it.
+We collect data for 13,383 first time code contributions from 45 projects on the
+website GitHub and analyze behavior of developers before submitting code as well
+as community response to code contributions. We find that most developers do not
+engage with the community on GitHub before attempting to submit code changes. We
+also find that most code submissions do not elicit much community response, and
+the metrics we use for community response can not predict whether or not a pull
+request is accepted. Our findings differ from previous research on open source
+software communities and social theories of learning in communities of practice.
 \end{abstract}
 
 
@@ -87,18 +86,57 @@ to follow other users and leave comments on projects. GitHub provides a wealth
 of data for studying computer supported cooperative work, as it is a
 centralized location where many different tasks take place. For example, users
 can create bug reports, submit fixes, and engage in discussions about new
-features all on one website.  In this study, we use statistical and machine
-learning methods on data from GitHub repositories to explore how different
-factors may affect the acceptance of code changes from first time contributors.
+features all on one website.
+
+As open source software continues to grow and more users become reliant on open
+source technologies, it is important to understand how this software is
+developed. Research of open source software can also contribute to existing
+research in a variety of other fields, including software engineering and computer
+supported cooperative work. In this study, we examine the behavior of first time
+code contributors and the community response to their code contributions. In
+Section~\ref{sec:relatedwork}, we discuss how previous studies in open source
+communities provide insight for existing literature on virtual teams and
+distributed work. This study examines how new users join these types of
+communities.
+
+We are interested in how community engagement by a developer and community
+response affects whether or not a first time code contribution is accepted or
+not. We focus on code contributions as this shows the first time a user is
+attempting to participate in a core act of development. Code contributions can
+also be accepted or rejected, so our analysis allows us to see how these
+social factors contribute to acceptance within the community.
 
 The rest of this paper is organized as follows. The rest of this chapter
-provides a literature review on the subject, establishing the importance of
-studying open source software development, situating it within a context of
-virtual work and computer mediated communication, and reviewing a theoretical
-basis we use to inform our empirical methods. Chapter~\ref{chap:methods}
-describes our data collection and data analysis methods. The results of our
-experiments are discussed in Chapter~\ref{chap:results}. We conclude in
-Chapter~\ref{chap:conclusion} and discuss opportunities for future work.
+provides an overview of terminology specific to GitHub that will be used
+throughout the paper, as well as  a literature review on research of communities
+of practice and open source, establishing the importance of studying open source
+software development, situating it within a context of virtual work and computer
+mediated communication, and reviewing a theoretical basis we use to inform our
+empirical methods. Chapter~\ref{chap:methods} describes our data collection and
+data analysis methods. The results of our experiments are discussed in
+Chapter~\ref{chap:results}. Our results differ from previous research in this
+area. We discuss possible reasons for this in Chapter~\ref{chap:conclusion} as
+well as opportunities for future work.
+
+
+\Section{Terminology} \label{sec:terms}
+
+A software project on the website is referred to as a \textit{repository}. Any
+user on GitHub can \textit{star} a repository. Users star repositories to be
+able to easily navigate to it and to receieve updates on activity from the
+repository. If a developer wants to contribute to another one of developer's
+repositories, he can \textit{fork} the repository, which creates a copy of the
+project for him to work on. As the developer makes changes to this code, he
+\textit{commits} his changes. A \textit{commit} is a snapshot of the code at a
+certain point in time. When the developer is finished, he can submit a
+\textit{pull request} to the owner of the project. All pull requests for a
+project are viewable on GitHub, and any user of the site can comment on them. A
+pull request can have a status of open or closed. A status of open indicates
+that that owner of the repository has not made a decision about whether or not
+to include the changes. If the owner of a repository wants to incorporate the
+changes the developer made, he can \textit{merge} them into the repository. A
+pull request can be closed without being merged, which means that the changes
+the developer made were not accepted.
 
 
 \Section{Related Work} \label{sec:relatedwork}
@@ -121,7 +159,7 @@ Existing research approaches FLOSS from many different angles, including
 motivation of open source
 developers~\cite{fang_understanding_2009},
 ~\cite{lakhani_why_2003},~\cite{shah_motivation_2006}; governance of open souce
-projects~\cite{hippel_open_2003},~\cite{omahony_guarding_2003},~\cite{omahoney_governance_2007};
+projects~\cite{hippel_open_2003},~\cite{omahony_guarding_2003},~\cite{omahony_governance_2007};
 and knowledge sharing within FLOSS
 communities~\cite{endres_tacit_2007},~\cite{hemetsberger_collective_2009},~\cite{sowe_understanding_2008}.
 Our study focuses on the behavior of first time contributors to FLOSS projects
@@ -172,35 +210,14 @@ computer mediated communication.  In their study on members of Wikipedia,
 ~\cite{bryant_becoming_2005} note that members initially become involved through
 peripheral activities. These are simple and low risk activities members can take
 part in to learn more about the community before trying to become major
-contributors. Similarly, ~\cite{von_krogh_community_2003} from observing open
-source communities generate the construct of a \textit{joining script}, where
-each project has a set of tasks for new developers to go through before being
-accepted into the community.
-
-Our study seeks to which factors contribute to the acceptance of code
-contributions of first time contributors. We use LPP as a theoretical framework
-to ground our experiments.
+contributors. Similarly, von Krogh et. al ~\cite{von_krogh_community_2003} from
+observing open source communities generate the construct of a \textit{joining
+script}, where each project has a set of tasks for new developers to go through
+before being accepted into the community. The data we collect in
+Section~\ref{sec:datacollection} is based on this theoretical framework.
 
 \Chapter{METHODS} \label{chap:methods}
 
-\Section{Terminology} \label{sec:terms}
-
-A software project on the website is referred to as a \textit{repository}. Any
-user on GitHub can \textit{star} a repository. Users star repositories to be
-able to easily navigate to it and to receieve updates on activity from the
-repository. If a developer wants to contribute to another one of developer's
-repositories, he can \textit{fork} the repository, which creates a copy of the
-project for him to work on. As the developer makes changes to this code, he
-\textit{commits} his changes. A \textit{commit} is a snapshot of the code at a
-certain point in time. When the developer is finished, he can submit a
-\textit{pull request} to the owner of the project. All pull requests for a
-project are viewable on GitHub, and any user of the site can comment on them. A
-pull request can have a status of open or closed. A status of open indicates
-that that owner of the repository has not made a decision about whether or not
-to include the changes. If the owner of a repository wants to incorporate the
-changes the developer made, he can \textit{merge} them into the repository. A
-pull request can be closed without being merged, which means that the changes
-the developer made were not accepted.
 
 \Section{Data Collection} \label{sec:datacollection}
 
@@ -430,7 +447,7 @@ In this study, we analyzed community engagement and community response of first
 time code contributors on GitHub. We found that most developers do not engage by
 participating in discussions on GitHub before submitting code changes. We also
 find that most submitted pull requests do not attract much community response,
-and our attempts at measuring communtiy response do not provide good predictors
+and our attempts at measuring community response do not provide good predictors
 for whether or not a pull request is accepted. Our findings have implications
 for researchers, open source contributors, and open source project maintainers.
 
@@ -510,10 +527,10 @@ community response can affect developer retention in GitHub projects.
 
 To better understand the way that the GitHub interface affects developer
 behavior will require further qualitative study. While there have been surveys
-of GitHub developers previously~\cite{mcdonald_performance_13}, there remains a
-lot of work left to do in this area. Future quantitative studies should collect
-larger samples of data and explore new ways of measuring these types of social
-variables.
+of GitHub developers previously~\cite{mcdonald_performance_2013}, there remains
+a lot of work left to do in this area. Future quantitative studies should
+collect larger samples of data and explore new ways of measuring these types of
+social variables.
 
 \clearpage
 
