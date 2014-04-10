@@ -11,6 +11,7 @@
 % See Help file for more about options.
 
 \usepackage{graphicx}    % This package is used for Figures
+\usepackage{rotating}
 
 \begin{document}
 
@@ -238,23 +239,95 @@ the GitHub API as well as these text patterns results in finding 5,239, or
 
 \Section{Data Analysis} \label{sec:data_analysis}
 
+We divide our analyis into two dimensions: community engagement of developer and
+communtiy response. Our research questions our presented in
+Table~\ref{research_questions}, along with a summary of the variables and
+methods we used.
+
+\begin{sidewaystable}[ht] \centering \label{tbl:research_questions}
+\caption{Summary of research questions and methods.}
+\begin{tabular}{ p{3in} p{3in} p{2in} }
+\hline\hline
+Research Question
+& Data                                  & Measure
+\\
+How does a user engage before submitting their first pull request?
+& Comments on other pull requests.      & We plot the total number
+of pull requests a user has commented on the x-axis of
+Figure~\ref{fig:aprr_up}.
+\\
+Does community response affect whether or not a pull request is
+merged? & Number of comments on pull request.   & We plot the
+total number of comments for submitted pull requests on the
+y-axis of Figure~\ref{fig:aprr_up}.
+\\
+~
+& Language in comments on pull request. & We train both a
+logistic regression and naive bayes classifier after
+converting comments on submitted pull requests to feature
+vectors. Results are shown in
+Table~\ref{tbl:classifiers} \\
+\hline
+\end{tabular}
+\end{sidewaystable}
+
+\Subsection{Community Engagement of Developer}
+To explore the process of legitimate peripheral participation discussed in
+Section~\ref{sec:communities}, we count the total number of pull requests a
+developer commented on before submitting his own pull request. We consider
+commenting on other pull requests the primary peripheral activity a user can
+participate in. This variable is shown in the x-axis of
+Figure~\ref{fig:aprr_up}.
+
+\begin{figure}[p] \centering \label{fig:aprr_up}
+\includegraphics[scale=0.6]{figures/aprr_up_ggplot.png} \caption{User
+participation and attention a pull request recieves for all first pull
+requests.} \end{figure}
+
+\Subsection{Community Response}
+In addition to measuring the activity of a developer in the community before
+submitting a pull request, we are also interested in measuring the community
+response to a given pull request and how that response relates to whether or not
+a pull request is accepted. We measure this in two ways.
+
+First, we simply count the number of comments on a given pull request. This is
+used as a basic metric of how much attention a pull request receives. This
+variable is shown on the y-axis of Figure~\ref{fig:aprr_up}.
+
+Our next analysis of community response focuses on the language of the comments
+on a pull request. To test whether or not the content of these comments is
+predictive of whether or not a pull request is merged, we collect the comments
+for each of our first pull requests. We ignore comments made by the user who
+submitted the pull request, since we are interested in what other users had to
+say about it. We also ignore the last comment associated with a pull request,
+since these often will explicitly say whether or not the maintainer is merging
+the pull request or not.  We are interested in whether the type of language used
+in the discussion of a pull request is predictive of whether or not it is
+accepted. We ignore pull requests that only have one comment associated with it.
+This leaves 5,674 pull requests. 3,811, approximately 67\% were not accepted. We
+treat the remaining comments associated with the pull request as one document,
+and convert them into feature vectors representing the count of each unigram and
+bigram in the documents, and train both a logistic regression and naive bayes
+classifier using this feature set. The results of testing these classifiers is
+shown in Table~\ref{tbl:classifiers}. The results shown are the result of
+running 10-fold cross validation.
+
+\begin{table}[ht] \centering \label{tbl:classifiers}
+  \caption{Classifier results}
+  \begin{tabular}{lll}
+  \hline\hline
+  ~         & Logistic Regression & Naive Bayes \\
+  Accuracy  & 69.6\%              & 70.6\%      \\
+  Precision & 56.0\%              & 60.3\%      \\
+  Recall    & 36.1\%              & 30.7\%      \\
+  \hline
+  \end{tabular}
+\end{table}
+
 \Chapter{RESULTS} \label{chap:results}
 
-\Section{Communities of Practice} \label{sec:communities}
+\Section{Community Engagement of Developer}
 
-In this section, we explore both how a user engages with the community before
-submitting their pull request, as well as try to measure the community response
-to the pull request.  We consider the main peripheral activity a user can
-participate in on GitHub is commenting on other pull requests. For each first
-pull request in our dataset, we count the number of other pull requests the user
-commented on before submitting. Based on the these previous findings, we would
-expect to see a positive correlation between this number and the likelihood that
-a pull request is recieved. We also count the number of comments that each first
-pull request recieves, with the assumption that this variable can be used to
-measure the amount of community interest in a given pull request. We plot these
-variables in Figure~\ref{fig:aprr_up}.
-
-\Subsection{User Participation}
 We see that user participation for the majority of all first pull requests, both
 merged and not merged, is 0. This indicates that in general, most users are not
 attempting to engage in the peripheral activity of commenting on other pull
@@ -265,19 +338,22 @@ contributions did increase for some projects that moved from other hosting
 options to GitHub~\cite{mcdonald_performance_2013}. It is possible this
 interface lowers the barrier of entry for a developer who wants to contribute to
 a project, and allows them to bypass participating in the joining script
-described by ~\cite{von_krogh_community_2003}.
+described by von Krogh et al. ~\cite{von_krogh_community_2003}.
 
 We also examine these variables for first pull requests by users who later
-submit another pull request. Our intuition here is that some users might
-encounter a bug they fix or desire a feature that they implement, and then
-submit these changes back to repository. They may not comment on other pull
-requests as they are not interested in becoming long term members of the
-community, but rather are just interested in submitting a one time patch.
+submit another pull request. We want to see whether or not this no engagement
+pattern continues to hold for users who will become active contributors. Our
+intuition here is that some users might encounter a bug they fix or desire a
+feature that they implement, and then submit these changes back to repository.
+They may not comment on other pull requests as they are not interested in
+becoming long term members of the community, but rather are just interested in
+submitting a one time patch. Users who do plan on becoming active members,
+however, may participate in peripheral activities more.
 Figure~\ref{fig:aprr_up_repeaters} shows a visualization of the same first pull
 requests, but only for users who submit at least one other pull request at a
 later point in our data set, and Figure~\ref{fig:aprr_up_repeaters_10} shows the
-data for users who submit at least 5 more times. Looking at users who submit
-at least one other time cuts our number of observations from 13,383 to 5,207,
+data for users who submit at least 5 more times. Looking at users who submit at
+least one other time cuts our number of observations from 13,383 to 5,207,
 indicating that approximately 61\% of these pull requests come from users who
 will not contribute any others. Looking at users who will submit at least 10
 more times gives us a total of 1,155 observations.
@@ -295,10 +371,20 @@ pull requests. There is not a strong correlation between these variables
 (Spearman's $\rho$  = 0.44), indicating that users do not necessarily
 participate in more commenting as they continue to submit more pull requests.
 
-\begin{figure}[p] \centering \label{fig:aprr_up}
-\includegraphics[scale=0.6]{figures/aprr_up_ggplot.png} \caption{User
-participation and attention a pull request recieves for all first pull
-requests.} \end{figure}
+It's worth noting the one extreme outlier present in
+Figures~\ref{fig:aprr_up}, ~\ref{fig:aprr_up_repeaters}, and
+~\ref{fig:aprr_up_repeaters_10}. This is an interesting case of a project
+maintainer, who has commit access and wouldn't typically need to submit a pull
+request to submit changes, creating a pull request for commits related to a
+major upgrade in the project. By creating a pull request, he was able to
+document all the changes associated with this change and allow community members
+to ask questions or comment on the changes. He has a high number of previous
+comments since he is in charge of accepting pull requests. Due to the nature of
+this pull request, there is a high number of comments on this pull requests on
+it, since many other developers are asking questions or voicing their opinions.
+This is a useful example that demonstrates the different ways pull requests may
+be used in different projects, and how the way they are used may change
+depending on the type of user submitting them.
 
 \begin{figure}[p] \centering \label{fig:aprr_up_repeaters}
 \includegraphics[scale=0.6]{figures/aprr_up_repeaters_ggplot.png} \caption{User
@@ -315,7 +401,7 @@ users who submit at least 10 other pull requests in our data set.} \end{figure}
 \caption{Total number of pull requests commented on and total number of pull
 requests submitted for each user.} \end{figure}
 
-\Subsection{Attention Pull Request Receives}
+\Section{Community Response}
 In Figure~\ref{fig:aprr_up}, we see more variance in the number of comments on
 first pull requests than we did with the number of pull requests users commented
 on before submitting. However, there is clearly no linear separation of merged
@@ -323,55 +409,31 @@ and not merged pull requests using this variable, so it seems just viewing the
 amount of activity a pull request receives is not enough to explain whether or
 not it gets merged.
 
-To test whether or not the content of these comments is predictive of whether or
-not a pull request is merged, we collect the comments for each of our first pull
-requests. We ignore comments made by the user who submitted the pull request,
-since we are interested in what other users had to say about it. We also ignore
-the last comment associated with a pull request, since these often will
-explicitly say whether or not the maintainer is merging the pull request or not.
-We are more interested in if the type of language used in the discussion of a
-pull request is predictive of whether or not it is accepted. We ignore pull
-requests that only have one comment associated with it. This gives us a sample
-size of 5,674. 3,811, approximately 67\% are unmerged. We treat the remaining
-comments associated with the pull request as one document, and convert them into
-feature vectors representing the count of each unigram and bigram in the
-documents, and train both a logistic regression and naive bayes classifier using
-this feature set. The results of testing these classifiers is shown in
-Table~\ref{tbl:classifiers}. The results shown are the result of running 10-fold
-cross validation. The low recall rates indicate that the text data is not
-sufficient to distinguish positive cases. Of course, our sample size of 5,674 is
-relatively small, but it is interesting to note that only 42\% of the first pull
-requests in our data set have more than 1 comment associated with them.
-
-\begin{table}[ht] \centering \label{tbl:classifiers}
-  \caption{Classifier results}
-  \begin{tabular}{lll}
-  \hline\hline
-  ~         & Logistic Regression & Naive Bayes \\
-  Accuracy  & 69.6\%              & 70.6\%      \\
-  Precision & 56.0\%              & 60.3\%      \\
-  Recall    & 36.1\%              & 30.7\%      \\
-  \hline
-  \end{tabular}
-\end{table}
+Training classifiers using the comment text may help address this problem, as
+this can capture the valence of the comments, rather than just the raw number.
+However, the low recall rates we see in Table~\ref{tbl:classifiers} indicate
+that the text data is not sufficient to distinguish positive cases. Of course,
+our sample size of 5,674 is relatively small, but it is interesting to note that
+only 42\% of the first pull requests in our data set have more than 1 comment
+associated with them.
 
 
 
-\Section{First Mover Advantage} \label{sec:firstmover}
+% \Section{First Mover Advantage} \label{sec:firstmover}
 
-~\cite{viegas_studying_2004} find what they call a \textit{first-mover
-advantage} in the editing of Wikipedia articles, wherein the first contribution
-to a page tends to survive longer and recieve less modifications than following
-contributions. In this section, we explore how the acceptance of pull requests
-changes over time.
+% ~\cite{viegas_studying_2004} find what they call a \textit{first-mover
+% advantage} in the editing of Wikipedia articles, wherein the first contribution
+% to a page tends to survive longer and recieve less modifications than following
+% contributions. In this section, we explore how the acceptance of pull requests
+% changes over time.
 
-In Figure~\ref{fig:acceptance_over_time}, we plot the average number of both
-merged and unmerged pull requests over a 12 month period.
+% In Figure~\ref{fig:acceptance_over_time}, we plot the average number of both
+% merged and unmerged pull requests over a 12 month period.
 
-\begin{figure}[p] \centering \label{fig:acceptance_over_time}
-\includegraphics[scale=0.6]{figures/merged_over_time_excel.png}
-\caption{Average number of merged and not merged pull requests over 12 months.}
-\end{figure}
+% \begin{figure}[p] \centering \label{fig:acceptance_over_time}
+% \includegraphics[scale=0.6]{figures/merged_over_time_excel.png}
+% \caption{Average number of merged and not merged pull requests over 12 months.}
+% \end{figure}
 
 \clearpage
 
