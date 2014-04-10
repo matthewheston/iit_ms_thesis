@@ -241,11 +241,12 @@ the GitHub API as well as these text patterns results in finding 5,239, or
 
 We divide our analyis into two dimensions: community engagement of developer and
 communtiy response. Our research questions our presented in
-Table~\ref{research_questions}, along with a summary of the variables and
+Table~\ref{tbl:research_questions}, along with a summary of the variables and
 methods we used.
 
-\begin{sidewaystable}[ht] \centering \label{tbl:research_questions}
+\begin{sidewaystable}[ht] \centering
 \caption{Summary of research questions and methods.}
+\label{tbl:research_questions}
 \begin{tabular}{ p{3in} p{3in} p{2in} }
 \hline\hline
 Research Question
@@ -279,10 +280,10 @@ commenting on other pull requests the primary peripheral activity a user can
 participate in. This variable is shown in the x-axis of
 Figure~\ref{fig:aprr_up}.
 
-\begin{figure}[p] \centering \label{fig:aprr_up}
+\begin{figure}[p] \centering
 \includegraphics[scale=0.6]{figures/aprr_up_ggplot.png} \caption{User
 participation and attention a pull request recieves for all first pull
-requests.} \end{figure}
+requests.} \ \label{fig:aprr_up} \end{figure}
 
 \Subsection{Community Response}
 In addition to measuring the activity of a developer in the community before
@@ -312,8 +313,9 @@ classifier using this feature set. The results of testing these classifiers is
 shown in Table~\ref{tbl:classifiers}. The results shown are the result of
 running 10-fold cross validation.
 
-\begin{table}[ht] \centering \label{tbl:classifiers}
+\begin{table}[ht] \centering
   \caption{Classifier results}
+  \label{tbl:classifiers}
   \begin{tabular}{lll}
   \hline\hline
   ~         & Logistic Regression & Naive Bayes \\
@@ -326,7 +328,7 @@ running 10-fold cross validation.
 
 \Chapter{RESULTS} \label{chap:results}
 
-\Section{Community Engagement of Developer}
+\Section{Community Engagement of Developer} \label{results_engagement}
 
 We see that user participation for the majority of all first pull requests, both
 merged and not merged, is 0. This indicates that in general, most users are not
@@ -386,20 +388,23 @@ This is a useful example that demonstrates the different ways pull requests may
 be used in different projects, and how the way they are used may change
 depending on the type of user submitting them.
 
-\begin{figure}[p] \centering \label{fig:aprr_up_repeaters}
+\begin{figure}[p] \centering
 \includegraphics[scale=0.6]{figures/aprr_up_repeaters_ggplot.png} \caption{User
 participation and attention a pull request recieves variables for users who
-submit at least one other pull request in our data set.} \end{figure}
+submit at least one other pull request in our data set.}
+\label{fig:aprr_up_repeaters} \end{figure}
 
-\begin{figure}[p] \centering \label{fig:aprr_up_repeaters_10}
+\begin{figure}[p] \centering
 \includegraphics[scale=0.6]{figures/aprr_up_repeaters_10_ggplot.png}
 \caption{User participation and attention a pull request recieves variables for
-users who submit at least 10 other pull requests in our data set.} \end{figure}
+users who submit at least 10 other pull requests in our data set.}
+\label{fig:aprr_up_repeaters_10} \end{figure}
 
-\begin{figure}[p] \centering \label{fig:commented_pullrequests_totals}
+\begin{figure}[p] \centering
 \includegraphics[scale=0.6]{figures/commented_pullrequests_totals_ggplot.png}
 \caption{Total number of pull requests commented on and total number of pull
-requests submitted for each user.} \end{figure}
+requests submitted for each user.} \label{fig:commented_pullrequests_totals}
+\end{figure}
 
 \Section{Community Response}
 In Figure~\ref{fig:aprr_up}, we see more variance in the number of comments on
