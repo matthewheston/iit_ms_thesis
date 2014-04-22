@@ -271,13 +271,13 @@ Research Question
 \\
 How does a user engage before submitting their first pull request?
 & Comments on other pull requests.      & We plot the total number
-of pull requests a user has commented on the x-axis of
-Figure~\ref{fig:aprr_up}.
+of pull requests a user has commented in
+Figure~\ref{fig:up_density}.
 \\
 Does community response affect whether or not a pull request is
 merged? & Number of comments on pull request.   & We plot the
-total number of comments for submitted pull requests on the
-y-axis of Figure~\ref{fig:aprr_up}.
+total number of comments for submitted pull requests in
+Figure~\ref{fig:aprr_density}.
 \\
 ~
 & Language in comments on pull request. & We train both a
@@ -294,13 +294,17 @@ To explore the process of legitimate peripheral participation discussed in
 Section~\ref{sec:communities}, we count the total number of pull requests a
 developer commented on before submitting his own pull request. We consider
 commenting on other pull requests the primary peripheral activity a user can
-participate in. This variable is shown in the x-axis of
-Figure~\ref{fig:aprr_up}.
+participate in. This variable is shown in Figure~\ref{fig:up_density}.
 
 \begin{figure}[p] \centering
-\includegraphics[scale=0.6]{figures/aprr_up_ggplot.png} \caption{User
-participation and attention a pull request recieves for all first pull
-requests.} \ \label{fig:aprr_up} \end{figure}
+\includegraphics[scale=0.6]{figures/number_comments_density_ggplot.png}
+\caption{User participation density plots.}  \label{fig:up}
+\end{figure}
+
+\begin{figure}[p] \centering
+\includegraphics[scale=0.6]{figures/comments_on_pr_density_ggplot.png}
+\caption{Attention pull request receives density plots.}  \label{fig:aprr}
+\end{figure}
 
 \Subsection{Community Response}
 In addition to measuring the activity of a developer in the community before
@@ -310,7 +314,7 @@ a pull request is accepted. We measure this in two ways.
 
 First, we simply count the number of comments on a given pull request. This is
 used as a basic metric of how much attention a pull request receives. This
-variable is shown on the y-axis of Figure~\ref{fig:aprr_up}.
+variable is shown in Figure~\ref{fig:aprr_density}.
 
 Our next analysis of community response focuses on the language of the comments
 on a pull request. To test whether or not the content of these comments is
@@ -368,9 +372,9 @@ They may not comment on other pull requests as they are not interested in
 becoming long term members of the community, but rather are just interested in
 submitting a one time patch. Users who do plan on becoming active members,
 however, may participate in peripheral activities more.
-Figure~\ref{fig:aprr_up_repeaters} shows a visualization of the same first pull
+Figure~\ref{fig:up_repeaters} shows a visualization of the same first pull
 requests, but only for users who submit at least one other pull request at a
-later point in our data set, and Figure~\ref{fig:aprr_up_repeaters_10} shows the
+later point in our data set, and Figure~\ref{fig:up_repeaters_10} shows the
 data for users who submit at least 5 more times. Looking at users who submit at
 least one other time cuts our number of observations from 13,383 to 5,207,
 indicating that approximately 61\% of these pull requests come from users who
@@ -390,9 +394,9 @@ pull requests. There is not a strong correlation between these variables
 (Spearman's $\rho$  = 0.44), indicating that users do not necessarily
 participate in more commenting as they continue to submit more pull requests.
 
-It's worth noting the one extreme outlier present in
-Figures~\ref{fig:aprr_up}, ~\ref{fig:aprr_up_repeaters}, and
-~\ref{fig:aprr_up_repeaters_10}. This is an interesting case of a project
+It's worth noting the one extreme outlier present in our data. One submitted
+pull request received 200 comments and was submitted by a user who had commented
+on 900 previous pull requests. This is an interesting case of a project
 maintainer, who has commit access and wouldn't typically need to submit a pull
 request to submit changes, creating a pull request for commits related to a
 major upgrade in the project. By creating a pull request, he was able to
@@ -406,16 +410,15 @@ be used in different projects, and how the way they are used may change
 depending on the type of user submitting them.
 
 \begin{figure}[p] \centering
-\includegraphics[scale=0.6]{figures/aprr_up_repeaters_ggplot.png} \caption{User
-participation and attention a pull request recieves variables for users who
-submit at least one other pull request in our data set.}
-\label{fig:aprr_up_repeaters} \end{figure}
+\includegraphics[scale=0.6]{figures/number_comments_density_repeaters_ggplot.png}
+\caption{User participation density plots for users who submit at least one
+other pull request in our data set.} \label{fig:repeaters} \end{figure}
 
 \begin{figure}[p] \centering
-\includegraphics[scale=0.6]{figures/aprr_up_repeaters_10_ggplot.png}
+\includegraphics[scale=0.6]{figures/number_comments_density_repeaters_10_ggplot.png}
 \caption{User participation and attention a pull request recieves variables for
 users who submit at least 10 other pull requests in our data set.}
-\label{fig:aprr_up_repeaters_10} \end{figure}
+\label{fig:repeaters_10} \end{figure}
 
 \begin{figure}[p] \centering
 \includegraphics[scale=0.6]{figures/commented_pullrequests_totals_ggplot.png}
@@ -424,10 +427,11 @@ requests submitted for each user.} \label{fig:commented_pullrequests_totals}
 \end{figure}
 
 \Section{Community Response}
-In Figure~\ref{fig:aprr_up}, we see more variance in the number of comments on
+In Figure~\ref{fig:up}, we see more variance in the number of comments on
 first pull requests than we did with the number of pull requests users commented
-on before submitting. However, there is clearly no linear separation of merged
-and not merged pull requests using this variable, so it seems just viewing the
+on before submitting. However, this variable does not seem to be a good
+predictor of whether or not a pull request is merged, since both the merged and
+not merged distributions follow a similar pattern. It seems just viewing the
 amount of activity a pull request receives is not enough to explain whether or
 not it gets merged.
 
