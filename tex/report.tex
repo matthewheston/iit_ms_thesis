@@ -458,12 +458,39 @@ not it gets merged.
 Training classifiers using the comment text may help address this problem, as
 this can capture the valence of the comments, rather than just the raw number.
 However, the low recall rates we see in Table~\ref{tbl:classifiers} indicate
-that the text data is not sufficient to distinguish positive cases. Of course,
-our sample size of 5,674 is relatively small, but it is interesting to note that
+that the text data is not sufficient to distinguish positive cases. We list the
+top five features for each class in Table~\ref{tbl:features}. Despite leaving
+out the last comment from each comment thread to avoid words that explicitly
+describe the action being taken, we still see these in our top features. Both
+"land" and "landed" are used in some repositories when a commit is merged, but
+not through the GitHub interface to indicate the git commit hash where the pull
+request commits were merged. We also see "closing" in the negative class, which
+shows explicit action being taken. Some of our top features do seem fitting. The
+phrase "lgtm" which stands for "looks good to me" seems indicative of positive
+feedback from the community. Other examples, however, seem to indicate
+overfitting, which we see in the top feature for the negative class, the word
+"the."
+
+Our sample size of 5,674 is relatively small, but it is interesting to note that
 only 42\% of the first pull requests in our data set have more than 1 comment
 associated with them. Our research question that drove these experiments was how
 community response affects whether or not a pull request is accepted. However,
 we see that the majority of pull requests don't attract any community attention.
+
+\begin{table}[ht] \centering
+\caption{Classifier top features}
+\label{tbl:features}
+\begin{tabular}{ll|ll}
+\hline\hline
+Merged  & ~     & Not merged  & ~      \\
+land    & 0.817 & the         & -0.734 \\
+landed  & 0.767 & bootstrap   & -0.711 \\
+fine    & 0.717 & good thanks & -0.682 \\
+lgtm    & 0.709 & in          & -0.682 \\
+it will & 0.656 & closing     & -0.605 \\
+\hline
+\end{tabular}
+\end{table}
 
 \Chapter{Conclusion} \label{chap:conclusion}
 
@@ -564,18 +591,29 @@ understand what contributes to acceptance on GitHub. Static analysis tools may
 be used in addition to the metrics we used in this study to further explore how
 the code itself affects whether or not a pull request is accepted.
 
-In addition to studying community engagement by developers, we also examined
-community response to these developers. In most cases, there was little
+In studying how communities respond to pull requests, we found in most cases, there was little
 community response. As mentioned above, attraction of new developers and
 retention of developers is important to project success. Future work should how
 community response can affect developer retention in GitHub projects.
 
-To better understand the way that the GitHub interface affects developer
-behavior will require further qualitative study. While there have been surveys
-of GitHub developers previously~\cite{mcdonald_performance_2013}, there remains
-a lot of work left to do in this area. Future quantitative studies should
-collect larger samples of data and explore new ways of measuring these types of
-social variables.
+In examining the top features for the classifiers we trained in studying
+community response, we found some issues. Our goal in filtering the text
+collected was to avoid words that explicitly described action being taken. We
+still found examples of these types of words in both our positive and negative
+classes. In the case of the positive (merged) class, the top feature was
+"land." This feature affects classifier performance since this word is used
+often in positive cases, but only in a few repositories. Future work studying
+linguistic features in this way should account for these types of project
+specific vocabularies.
+
+Finally, to better understand the way that the GitHub interface affects
+developer behavior will require further qualitative study. While there have been
+surveys of GitHub developers previously~\cite{mcdonald_performance_2013}, there
+remains a lot of work left to do in this area. Future quantitative studies
+should collect larger samples of data and explore new ways of measuring these
+types of social variables.
+
+
 
 \clearpage
 
