@@ -173,17 +173,17 @@ descriptions of virtual work and distributed teams.
 Previous studies have used version control histories to verify learning
 processes of new members in FLOSS projects~\cite{huang_mining_2005}. GitHub,
 however, has not been extensively studied as it is a relatively new social
-platform. Dabbish et al.~\cite{dabbish_social_2012} study how GitHub as a social
-application provides transparency and how that transparency affects
+platform. Dabbish et al.~\cite{dabbish_social_2012} studied how GitHub as a
+social application provides transparency and how that transparency affects
 collaboration and learning. They found that this transparency leads to
 inferences around commitment, work quality, community significance and personal
 relevance, which supports collaboration and learning. McDonald and
-Goggins~\cite{mcdonald_performance_2013} study how different communities on
+Goggins~\cite{mcdonald_performance_2013} studed how different communities on
 GitHub measure success, finding that most developers measure success in the
 number of contributors and contributor growth. They also found that developers
 believed the GitHub interface, in particular the use of pull requests, made
 communities more democratic and transpartent. Choi et
-al.~\cite{choi_herding_2013} study a sample of GitHub based projects to
+al.~\cite{choi_herding_2013} studied a sample of GitHub based projects to
 contribute to theories of developer coordination, finding that commits tend to
 happen in clustered events over time. In all these cases, the social features of
 GitHub, e.g. the ability to follow other users and view information about them,
@@ -207,27 +207,26 @@ our exploration community joining. LPP describes a process of learning in
 communities of practice in which newcomers join a community by participating in
 peripheral tasks and forming relationships to move towards the center of the
 community. Several studies of FLOSS development have used the LPP framework.
-Huang and Liu~\cite{huang_mining_2005} mine version control history to construct
-developer networks and identify core and peripheral community members.
-Ducheneaut~\cite{ducheneaut_socialization_2005} finds a pattern that resembles
+Huang and Liu~\cite{huang_mining_2005} mined version control history to
+construct developer networks and identify core and peripheral community members.
+Ducheneaut~\cite{ducheneaut_socialization_2005} found a pattern that resembles
 LPP in his study of contributors to the Python project. Ye and
-Kishida~\cite{ye_toward_2003} use LPP to ground their theory of motivation in
+Kishida~\cite{ye_toward_2003} used LPP to ground their theory of motivation in
 open source communities. This concept has been explored in other studies of
-computer mediated communication.  In their study on members of Wikipedia,
-Bryant et al. ~\cite{bryant_becoming_2005} note that members initially become
-involved through peripheral activities. These are simple and low risk activities
-members can take part in to learn more about the community before trying to
-become major contributors. Similarly, von Krogh et. al
-~\cite{von_krogh_community_2003} from observing open source communities generate
-the construct of a \textit{joining script}, where each project has a set of
-tasks for new developers to go through before being accepted into the community.
-The data we collect in Section~\ref{sec:datacollection} is based on this
-theoretical framework. We consider making code changes and submitting a pull
-request to be a core activity, and commenting on other pull requests to be the
-primary peripheral activity a user can participate in on GitHub. This follows
-previous studies that find most users participate in community discussions prior
-to submitting code~\cite{ducheneaut_socialization_2005,
-von_krogh_community_2003}.
+computer mediated communication.  In their study on members of Wikipedia, Bryant
+et al. ~\cite{bryant_becoming_2005} note that members initially become involved
+through peripheral activities. These are simple and low risk activities members
+can take part in to learn more about the community before trying to become major
+contributors. Similarly, von Krogh et. al ~\cite{von_krogh_community_2003} from
+observing open source communities generated the construct of a \textit{joining
+script}, where each project has a set of tasks for new developers to go through
+before being accepted into the community.  The data we collect in
+Section~\ref{sec:datacollection} is based on this theoretical framework. We
+consider making code changes and submitting a pull request to be a core
+activity, and commenting on other pull requests to be the primary peripheral
+activity a user can participate in on GitHub. This follows previous studies that
+find most users participate in community discussions prior to submitting
+code~\cite{ducheneaut_socialization_2005, von_krogh_community_2003}.
 
 \Chapter{METHODS} \label{chap:methods}
 
@@ -249,17 +248,17 @@ primarily for demonstration or documentation purposes, such as sample web
 applications to demonstrate use of a certain web framework. After filtering our
 intial list of 100, 45 repositories remained in our data set for analysis. We
 consider only pull requests with a status of closed. This resulted in
-approximately 44,400 pull requests. We further filtered this data by select only
-the first pull request a user submitted to a repository, leaving 13,383 pull
-requests. The distribution of these pull requests across repositories ranges
-from 10 to 1,489, with a median of 210. To find merged pull requests, we first
-filter all pull requests that are marked as merged by the GitHub API, meaning
-that the project maintainers used GitHub's merge feature to accept the pull
-request. In some repositories, project maintainers use a different workflow when
-accepting pull requests, wherein the code changes are accepted, but it is not
-reflected as merged on GitHub. In most of these cases, there is a standard way
-of reflecting this in the commit comments, so we use some naive heuristics for
-identifying these requests by searching commit comments for certain text
+approximately 44,400 pull requests. We further filtered this data by selecting
+only the first pull request a user submitted to a repository, leaving 13,383
+pull requests. The distribution of these pull requests across repositories
+ranges from 10 to 1,489, with a median of 210. To find merged pull requests, we
+first filter all pull requests that are marked as merged by the GitHub API,
+meaning that the project maintainers used GitHub's merge feature to accept the
+pull request. In some repositories, project maintainers use a different workflow
+when accepting pull requests, wherein the code changes are accepted, but it is
+not reflected as merged on GitHub. In most of these cases, there is a standard
+way of reflecting this in the commit comments, so we use some naive heuristics
+for identifying these requests by searching commit comments for certain text
 patterns. For example, in many projects, the project maintainer will manually
 add the commits from the pull request, and create a new commit with a commit
 message that follows the pattern "Closes {number}" where {number} is the pull
@@ -497,8 +496,8 @@ it will & 0.656 & closing     & -0.605 \\
 In this study, we analyzed community engagement and community response of first
 time code contributors on GitHub. We found that most developers do not engage by
 participating in discussions on GitHub before submitting code changes. We also
-find that most submitted pull requests do not attract much community response,
-and our attempts at measuring community response do not provide good predictors
+fou dthat most submitted pull requests do not attract much community response,
+and our attempts at measuring community response did not provide good predictors
 for whether or not a pull request is accepted. Our findings have implications
 for researchers, open source contributors, and open source project maintainers.
 
