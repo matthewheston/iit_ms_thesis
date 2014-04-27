@@ -36,11 +36,11 @@ of First Time Code Contributors on GitHub}
 completion of this thesis and also throughout my studies here at IIT. Her
 support and guidance have given me the desire to continue a career in research
 as well as the tools necessary to conduct research properly. I also want to
-thank my committee members Karl Stolley, who assisted me in the design of the
-tools I used in collecting data for this thesis as well as analyzing the data,
-and Aron Culotta, who provided a great deal of valuable feedback in my initial
-studies of GitHub data. Finally, I want to thank my parents, Robert and Susan
-Heston, for their continued support during my academic career.
+thank my committee members Dr. Karl Stolley, who assisted me in the design of
+the tools I used in collecting data for this thesis as well as analyzing the
+data, and Dr. Aron Culotta, who provided a great deal of valuable feedback in my
+initial studies of GitHub data. Finally, I want to thank my parents, Robert and
+Susan Heston, for their continued support during my academic career.
 % or \input{acknowledgement.tex} % you need a separate acknowledgement.tex file to include it.
 \end{acknowledgement}
 
@@ -63,7 +63,7 @@ Heston, for their continued support during my academic career.
 
 %%% Abstract %%%
 \begin{abstract}           % abstract environment, this is optional
-We collect data for 13,383 first time code contributions from 45 projects on the
+\par We collect data for 13,383 first time code contributions from 45 projects on the
 website GitHub and analyze behavior of developers before submitting code as well
 as community response to code contributions. We find that most developers do not
 engage with the community on GitHub before attempting to submit code changes. We
@@ -435,8 +435,8 @@ other pull request in our data set.} \label{fig:repeaters} \end{figure}
 
 \begin{figure}[p] \centering
 \includegraphics[scale=0.6]{figures/number_comments_density_repeaters_10_ggplot.png}
-\caption{User participation and attention a pull request recieves variables for
-users who submit at least 10 other pull requests in our data set.}
+\caption{User participation density plots for users who submit at least ten
+other pull requests in our data set.}
 \label{fig:repeaters_10} \end{figure}
 
 \begin{figure}[p] \centering
@@ -446,6 +446,7 @@ requests submitted for each user.} \label{fig:commented_pullrequests_totals}
 \end{figure}
 
 \Section{Community Response}
+
 In Figure~\ref{fig:up}, we see more variance in the number of comments on
 first pull requests than we did with the number of pull requests users commented
 on before submitting. However, this variable does not seem to be a good
